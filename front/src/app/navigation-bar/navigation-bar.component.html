@@ -1,0 +1,21 @@
+<div
+  *ngIf="!authorizationService.getLoggedInUser(); else signedInNavbar"
+  class="col-md-2 p-x-0 p-y-3"
+>
+  <nav>
+    <ul class="dropdown">
+      <li class="drop">
+        <a routerLink="home">Home</a>
+      </li>
+      <li class="drop">
+        <a routerLink="signIn">Sign in</a>
+      </li>
+      <li class="drop">
+        <a routerLink="signUp">Sign up</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<ng-template #signedInNavbar>
+  <app-navigation-bar-signed-in></app-navigation-bar-signed-in>
+</ng-template>
