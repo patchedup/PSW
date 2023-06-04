@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace back.Models;
 
-public partial class Notification
+public partial class Report
 {
     public long Id { get; set; }
 
@@ -11,7 +11,5 @@ public partial class Notification
 
     public string? Treatment { get; set; }
 
-    public long? AdminId { get; set; }
-
-    public virtual User? Admin { get; set; }
+    public virtual ICollection<Appointment> Appointments { get; } = new List<Appointment>();
 }

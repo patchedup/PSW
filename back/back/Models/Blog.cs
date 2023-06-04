@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Hospital.Models;
+namespace back.Models;
 
 public partial class Blog
 {
-    public int Id { get; set; }
-
-    public string? Title { get; set; }
+    public long Id { get; set; }
 
     public string? Content { get; set; }
 
-    public int DoctorId { get; set; }
+    public string? Title { get; set; }
 
-    public virtual User Doctor { get; set; } = null!;
+    public long? UserId { get; set; }
+
+    public virtual User? User { get; set; }
 }

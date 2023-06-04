@@ -1,25 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Hospital.Models;
+namespace back.Models;
 
 public partial class Appointment
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
 
-    public int DoctorId { get; set; }
+    public string? Time { get; set; }
 
-    public int PatientId { get; set; }
+    public long? DoctorId { get; set; }
 
-    public int InternistDataId { get; set; }
+    public long? MeasuredInternistDataId { get; set; }
 
-    public string Time { get; set; } = null!;
+    public long? PatientId { get; set; }
 
-    public virtual User Doctor { get; set; } = null!;
+    public long? ReferralId { get; set; }
 
-    public virtual InternistDatum IdNavigation { get; set; } = null!;
+    public long? ReportId { get; set; }
 
-    public virtual ICollection<MedicalReport> MedicalReports { get; } = new List<MedicalReport>();
+    public virtual User? Doctor { get; set; }
 
-    public virtual User Patient { get; set; } = null!;
+    public virtual InternistDatum? MeasuredInternistData { get; set; }
+
+    public virtual User? Patient { get; set; }
+
+    public virtual Referral? Referral { get; set; }
+
+    public virtual Report? Report { get; set; }
 }
