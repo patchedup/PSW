@@ -2,7 +2,7 @@ export class User {
   id: number = 0;
   email: string = '';
   password: string = '';
-  role: string = '';
+  role: string = 'PATIENT';
   firstName: string = '';
   lastName: string = '';
   numberOfPenalties: number = 0;

@@ -1,1 +1,81 @@
-<p>home-page works!</p>
+<div class="container">
+  <div
+    class="panel panel-default"
+    *ngFor="let b of blogs"
+    style="border-style: solid; margin-bottom: 50px"
+  >
+    <div
+      class="panel-body"
+      style="background-color: rgb(050, 47, 47) !important; color: white"
+    >
+      <div class="media">
+        <div class="media-left">
+          <img
+            class="media-object"
+            style="height: 150px"
+            src="https://www.nicepng.com/png/detail/232-2326770_icon-blogger-logo-now-creative-group-logo.png"
+            alt="Kurt"
+          />
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">{{ b.title }}</h4>
+          {{ b.content }}
+          <!-- <br /> -->
+          <!-- Doctor: {{ b.doctor.firstName }} {{ b.doctor.lastName }} -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div
+    class="card mx-4 mx-md-5 shadow-5-strong"
+    *ngIf="loggedUser?.role === 'DOCTOR'"
+    style="background: hsla(0, 0%, 100%, 0.2); backdrop-filter: blur(30px)"
+  >
+    <div class="card-body py-5 px-md-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-5">Create blog</h2>
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="newBlog.title"
+                  />
+                  <label class="form-label" for="title">Title</label>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <input
+                    id="content"
+                    name="content"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="newBlog.content"
+                  />
+                  <label class="form-label" for="content">Content</label>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button
+                class="btn btn-primary"
+                style="width: 100px"
+                (click)="create()"
+              >
+                Create
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

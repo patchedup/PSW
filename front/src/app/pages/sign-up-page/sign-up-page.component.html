@@ -10,22 +10,38 @@
       <div class="sign-in-htm">
         <div class="group">
           <label for="user" class="label">Email</label>
-          <input id="user" type="text" class="input" />
+          <input id="user" type="text" class="input" [(ngModel)]="user.email" />
         </div>
         <div class="group">
           <label for="pass" class="label">Password</label>
-          <input id="pass" type="password" class="input" data-type="password" />
+          <input
+            id="pass"
+            type="password"
+            class="input"
+            data-type="password"
+            [(ngModel)]="user.password"
+          />
         </div>
         <div class="group">
           <label for="name" class="label">First name</label>
-          <input id="name" type="text" class="input" />
+          <input
+            id="name"
+            type="text"
+            class="input"
+            [(ngModel)]="user.firstName"
+          />
         </div>
         <div class="group">
           <label for="latname" class="label">Last name</label>
-          <input id="latname" type="text" class="input" />
+          <input
+            id="latname"
+            type="text"
+            class="input"
+            [(ngModel)]="user.lastName"
+          />
         </div>
         <div class="group">
-          <input type="submit" class="button" value="Sign In" />
+          <button class="button" (click)="onSubmit()">Sign In</button>
         </div>
         <div class="hr"></div>
       </div>
