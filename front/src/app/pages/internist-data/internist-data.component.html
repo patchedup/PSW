@@ -1,0 +1,89 @@
+<div class="login-wrap">
+  <div class="login-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label
+      for="tab-1"
+      class="tab"
+      >Add new measurement</label
+    >
+
+    <div class="login-form">
+      <div class="sign-in-htm">
+        <div class="group">
+          <label for="user" class="label">Blood pressure</label>
+          <input
+            id="user"
+            type="number"
+            class="input"
+            [(ngModel)]="data.bloodPressure"
+          />
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Body fat</label>
+          <input
+            id="pass"
+            type="number"
+            class="input"
+            data-type="number"
+            [(ngModel)]="data.bodyFat"
+          />
+        </div>
+        <div class="group">
+          <label for="name" class="label">Blood suggar</label>
+          <input
+            id="name"
+            type="text"
+            class="input"
+            [(ngModel)]="data.bloodSuggar"
+          />
+        </div>
+        <div class="group">
+          <label for="latname" class="label">Weight</label>
+          <input
+            id="latname"
+            type="text"
+            class="input"
+            [(ngModel)]="data.weight"
+          />
+        </div>
+        <div class="group">
+          <button class="button" (click)="onSubmit()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="margin-top: 10px">
+  <h2>All measured internist datas:</h2>
+  <div
+    class="panel panel-default"
+    *ngFor="let d of allDatas"
+    style="border-style: solid; margin-bottom: 10px"
+  >
+    <div
+      class="panel-body"
+      style="background-color: rgb(050, 47, 47) !important; color: white"
+    >
+      <div class="media">
+        <div class="media-left">
+          <img
+            class="media-object"
+            style="height: 120px"
+            src="https://www.healthychildren.org/SiteCollectionImagesArticleImages/LiquidMeds_dosageSpoon.png"
+          />
+        </div>
+        <div class="media-body">
+          Blood suggar: {{ d.bloodSuggar }}
+          <br />
+          Body fat: {{ d.bodyFat }}
+          <br />
+          Blood pressure: {{ d.bloodPressure }}
+          <br />
+          Weight: {{ d.weight }}
+          <br />
+          Measured on: {{ d.measurmentDate }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
 import { FormsModule } from '@angular/forms';
+import { InternistDataComponent } from './pages/internist-data/internist-data.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     HomePageComponent,
     SignUpPageComponent,
     SignInPageComponent,
+    InternistDataComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

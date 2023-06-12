@@ -8,7 +8,7 @@ import { AuthorizationService } from '../../services/authorization.service';
   styleUrls: ['./sign-in-page.component.css'],
 })
 export class SignInPageComponent implements OnInit {
-  private loginDTO: LoginDTO = new LoginDTO();
+  loginDTO: LoginDTO = new LoginDTO();
 
   constructor(private authorizationService: AuthorizationService) {}
 
