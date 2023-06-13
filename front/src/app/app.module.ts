@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { InternistDataComponent } from './pages/internist-data/internist-data.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
+import { ReportsComponent } from './pages/reports/reports.component';
+import { AppointmentsOverviewComponent } from './pages/appointments-overview/appointments-overview.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { AdministrationComponent } from './pages/administration/administration.c
     InternistDataComponent,
     BlogsComponent,
     AdministrationComponent,
+    ReportsComponent,
+    AppointmentsOverviewComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

@@ -1,0 +1,38 @@
+<div class="container" style="margin-top: 20px">
+  <h2>All appointments:</h2>
+  <div
+    class="panel panel-default"
+    *ngFor="let a of appointments"
+    style="border-style: solid; margin-bottom: 50px"
+  >
+    <div
+      class="panel-body"
+      style="background-color: rgb(050, 47, 47) !important; color: white"
+    >
+      <div class="media">
+        <div class="media-left">
+          <img
+            class="media-object"
+            style="height: 200px"
+            src="https://thumbs.dreamstime.com/b/doctor-appointment-icon-flat-style-vector-eps-doctor-appointment-icon-flat-style-vector-eps-154283841.jpg"
+            alt="report"
+          />
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">Doctor: {{ a.doctorId }}</h4>
+          Time: {{ a.time }}
+          <br />
+          Blood suggar: {{ a.internistData.bloodSuggar }}
+          <br />
+          Body fat: {{ a.internistData.bodyFat }}
+          <br />
+          Blood pressure: {{ a.internistData.bloodPressure }}
+          <br />
+          Weight: {{ a.internistData.weight }}
+          <br />
+          Measured on: {{ a.internistData.measurmentDate }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

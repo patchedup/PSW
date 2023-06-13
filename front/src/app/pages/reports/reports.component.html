@@ -1,0 +1,40 @@
+<div class="container" style="margin-top: 20px">
+  <h2>All reports:</h2>
+  <div
+    class="panel panel-default"
+    *ngFor="let r of reports"
+    style="border-style: solid; margin-bottom: 50px"
+  >
+    <div
+      class="panel-body"
+      style="background-color: rgb(050, 47, 47) !important; color: white"
+    >
+      <div class="media">
+        <div class="media-left">
+          <img
+            class="media-object"
+            style="height: 150px"
+            src="https://previews.123rf.com/images/vectorgalaxy/vectorgalaxy1808/vectorgalaxy180809785/107381679-report-icon-vector-isolated-on-white-background-for-your-web-and-mobile-app-design-report-logo.jpg"
+            alt="report"
+          />
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">Diagnosis: {{ r.diagnosis }}</h4>
+          Treatment: {{ r.treatment }}
+          <br />
+          Time: {{ r.appointment.time }}
+          <br />
+          Blood suggar: {{ r.appointment.internistData.bloodSuggar }}
+          <br />
+          Body fat: {{ r.appointment.internistData.bodyFat }}
+          <br />
+          Blood pressure: {{ r.appointment.internistData.bloodPressure }}
+          <br />
+          Weight: {{ r.appointment.internistData.weight }}
+          <br />
+          Measured on: {{ r.appointment.internistData.measurmentDate }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
