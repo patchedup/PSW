@@ -1,0 +1,39 @@
+<div class="container" style="margin-top: 20px">
+  <h2>All users:</h2>
+  <div
+    class="panel panel-default"
+    *ngFor="let u of users"
+    style="border-style: solid; margin-bottom: 50px"
+  >
+    <div
+      class="panel-body"
+      style="background-color: rgb(050, 47, 47) !important; color: white"
+    >
+      <div class="media">
+        <div class="media-left">
+          <img
+            class="media-object"
+            style="height: 150px"
+            src="https://media.istockphoto.com/id/1182705407/vector/patient-bed-hospital-line-icon-on-white-background.jpg?s=1024x1024&w=is&k=20&c=gtiMCOeWjYqsvO-WZMYxYDvNJvvveIcCWdiA8ei1HZk="
+            alt="Userimg"
+          />
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">{{ u.firstName }} {{ u.lastName }}</h4>
+          Number of penalties: {{ u.numberOfPenalties }}
+          <br />
+          <button class="btn" *ngIf="u.isBlocked" (click)="unblock(u.id)">
+            Unblock
+          </button>
+          <button
+            class="btn"
+            *ngIf="!u.isBlocked && u.numberOfPenalties >= 3"
+            (click)="block(u.id)"
+          >
+            Block
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

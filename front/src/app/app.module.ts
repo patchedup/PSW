@@ -11,6 +11,7 @@ import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component
 import { FormsModule } from '@angular/forms';
 import { InternistDataComponent } from './pages/internist-data/internist-data.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
+import { AdministrationComponent } from './pages/administration/administration.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { BlogsComponent } from './pages/blogs/blogs.component';
     SignInPageComponent,
     InternistDataComponent,
     BlogsComponent,
+    AdministrationComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],

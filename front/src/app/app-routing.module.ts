@@ -5,11 +5,13 @@ import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component
 import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component';
 import { InternistDataComponent } from './pages/internist-data/internist-data.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
+import { AdministrationComponent } from './pages/administration/administration.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'internist', component: InternistDataComponent },
   { path: 'blogs', component: BlogsComponent },
+  { path: 'administration', component: AdministrationComponent },
   { path: 'signIn', component: SignInPageComponent },
   { path: 'signUp', component: SignUpPageComponent },
 ];
