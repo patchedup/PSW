@@ -1,0 +1,64 @@
+<div class="login-wrap">
+  <div class="login-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label
+      for="tab-1"
+      class="tab"
+      >Write report</label
+    >
+
+    <div class="login-form">
+      <div class="sign-in-htm">
+        <div class="group">
+          <label for="pass" class="label">Appointment</label>
+          <!--  <input
+            id="pass"
+            type="text"
+            class="input"
+            data-type="number"
+            [(ngModel)]="id"
+          />
+          <select
+      [ngModel]="id"
+      class="form-control"
+      (ngModelChange)="onChange($event)"
+      name="sele"
+    >
+      <option (value)="ap.id" *ngFor="let ap of appointmentsForReport">ap.patientId</option>
+    </select>-->
+          <select
+            [ngModel]="id"
+            class="form-control"
+            (ngModelChange)="onChange($event)"
+            name="sele"
+          >
+            <option (value)="(ap.id)" *ngFor="let ap of appointmentsForReport">
+              ap.patientId
+            </option>
+          </select>
+        </div>
+
+        <div class="group">
+          <label for="user" class="label">Diagnosis</label>
+          <input
+            id="user"
+            type="text"
+            class="input"
+            [(ngModel)]="newReport.diagnosis"
+          />
+        </div>
+        <div class="group">
+          <label for="user" class="label">Treatment</label>
+          <input
+            id="user"
+            type="text"
+            class="input"
+            [(ngModel)]="newReport.treatment"
+          />
+        </div>
+        <div class="group">
+          <button class="button" (click)="onSubmit()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

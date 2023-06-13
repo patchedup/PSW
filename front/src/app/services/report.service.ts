@@ -27,4 +27,11 @@ export class ReportService {
       ]);
     });
   }
+
+  // mocked For now, until backend is implemented
+  createReport(report: MedicalReport): Observable<MedicalReport> {
+    return new Observable((observer) => {
+      return observer.next(report);
+    });
+  }
 }

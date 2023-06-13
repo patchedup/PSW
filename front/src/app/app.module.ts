@@ -14,6 +14,7 @@ import { BlogsComponent } from './pages/blogs/blogs.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { AppointmentsOverviewComponent } from './pages/appointments-overview/appointments-overview.component';
+import { WriteReportComponent } from './pages/write-report/write-report.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AppointmentsOverviewComponent } from './pages/appointments-overview/app
     AdministrationComponent,
     ReportsComponent,
     AppointmentsOverviewComponent,
+    WriteReportComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],
