@@ -1,0 +1,65 @@
+<div class="login-wrap">
+  <div class="login-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label
+      for="tab-1"
+      class="tab"
+      >Write new blog</label
+    >
+
+    <div class="login-form">
+      <div class="sign-in-htm">
+        <div class="group">
+          <label for="user" class="label">Title</label>
+          <input
+            id="user"
+            type="text"
+            class="input"
+            [(ngModel)]="newBlog.title"
+          />
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Content</label>
+          <input
+            id="pass"
+            type="text"
+            class="input"
+            data-type="number"
+            [(ngModel)]="newBlog.content"
+          />
+        </div>
+        <div class="group">
+          <button class="button" (click)="onSubmit()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="margin-top: 20px">
+  <h2>All blogs:</h2>
+  <div
+    class="panel panel-default"
+    *ngFor="let b of blogs"
+    style="border-style: solid; margin-bottom: 50px"
+  >
+    <div
+      class="panel-body"
+      style="background-color: rgb(050, 47, 47) !important; color: white"
+    >
+      <div class="media">
+        <div class="media-left">
+          <img
+            class="media-object"
+            style="height: 150px"
+            src="https://www.nicepng.com/png/detail/232-2326770_icon-blogger-logo-now-creative-group-logo.png"
+            alt="Kurt"
+          />
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">{{ b.title }}</h4>
+          {{ b.content }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

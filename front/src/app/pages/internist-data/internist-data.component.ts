@@ -22,8 +22,9 @@ export class InternistDataComponent implements OnInit {
 
   onSubmit(): void {
     this.userService.createInternistData(this.data).subscribe((result) => {
-      this.allDatas.push(result);
+      this.allDatas.unshift(result);
       this.data = new InternistData();
+      alert('Success!');
     });
   }
 }

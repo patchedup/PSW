@@ -10,6 +10,7 @@ import { SignUpPageComponent } from './pages/sign-up-page/sign-up-page.component
 import { SignInPageComponent } from './pages/sign-in-page/sign-in-page.component';
 import { FormsModule } from '@angular/forms';
 import { InternistDataComponent } from './pages/internist-data/internist-data.component';
+import { BlogsComponent } from './pages/blogs/blogs.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { InternistDataComponent } from './pages/internist-data/internist-data.co
     SignUpPageComponent,
     SignInPageComponent,
     InternistDataComponent,
+    BlogsComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [],
