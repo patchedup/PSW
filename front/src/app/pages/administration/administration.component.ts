@@ -26,10 +26,7 @@ export class AdministrationComponent implements OnInit {
             return el;
           }
 
-          return {
-            ...el,
-            isBlocked: true,
-          };
+          return result;
         });
 
         alert('Success!');
@@ -45,10 +42,7 @@ export class AdministrationComponent implements OnInit {
             return el;
           }
 
-          return {
-            ...el,
-            isBlocked: false,
-          };
+          return result;
         });
 
         alert('Success!');

@@ -10,24 +10,23 @@ import { LoggedInUserDTO } from '../model/LoggedInUserDTO';
   providedIn: 'root',
 })
 export class AuthorizationService {
-  url : string = 'http://localhost:5098/api/auth'
+  url: string = 'http://localhost:5098/api/auth';
   loggedInUser: User | null = new User();
-  constructor(private http : HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   getLoggedInUser(): User | null {
-    const loggedInUserStr = localStorage.getItem('loggedInUser') ?? ''
-    if(loggedInUserStr){
+    const loggedInUserStr = localStorage.getItem('loggedInUser') ?? '';
+    if (loggedInUserStr) {
       return JSON.parse(loggedInUserStr);
     }
     return null;
-    
   }
 
   getJWTToken(): string {
     return localStorage.getItem('jwtToken') ?? '';
   }
 
-  getUsers() : any {
+  getUsers(): any {
     return this.http.get('http://localhost:5098/api/Users');
   }
   register(user: RegisterDTO): Observable<User> {

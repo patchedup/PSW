@@ -8,5 +8,6 @@ export class User {
   numberOfPenalties: number = 0;
   isBlocked: boolean = false;
   specialization: string = '';
+  is_female: number = 0;
   assignedGeneralPracticeId: number = 0;
 }

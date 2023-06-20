@@ -8,8 +8,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class UserService {
-  internistUrl : string = "http://localhost:5098/api/InternistDatas"
-  constructor(private http : HttpClient) {}
+  internistUrl: string = 'http://localhost:5098/api/InternistDatas';
+  usersUrl: string = 'http://localhost:5098/api/users';
+  constructor(private http: HttpClient) {}
 
   // mocked For now, until backend is implemented
   createInternistData(internistData: InternistData): Observable<InternistData> {
@@ -17,61 +18,18 @@ export class UserService {
   }
 
   getUserInternistData(): Observable<InternistData[]> {
-    return this.http.get<InternistData[]>(`${this.internistUrl}/user-data`)
+    return this.http.get<InternistData[]>(`${this.internistUrl}/user-data`);
   }
 
   getAllUsers(): Observable<User[]> {
-    return new Observable((observer) => {
-      return observer.next([
-        {
-          id: 1,
-          firstName: 'FN1',
-          lastName: 'LN1',
-          email: '1@gmail.com',
-          isBlocked: false,
-          numberOfPenalties: 2,
-          password: '',
-          role: 'PATIENT',
-          assignedGeneralPracticeId: 0,
-          specialization: '',
-        },
-        {
-          id: 2,
-          firstName: 'FN2',
-          lastName: 'LN2',
-          email: '2@gmail.com',
-          isBlocked: true,
-          numberOfPenalties: 3,
-          password: '',
-          role: 'PATIENT',
-          assignedGeneralPracticeId: 0,
-          specialization: '',
-        },
-        {
-          id: 3,
-          firstName: 'FN3',
-          lastName: 'LN3',
-          email: '3@gmail.com',
-          isBlocked: false,
-          numberOfPenalties: 3,
-          password: '',
-          role: 'PATIENT',
-          assignedGeneralPracticeId: 0,
-          specialization: '',
-        },
-      ]);
-    });
+    return this.http.get<User[]>(this.usersUrl);
   }
 
-  block(id: number): Observable<true> {
-    return new Observable((observer) => {
-      observer.next(true);
-    });
+  block(id: number): Observable<User> {
+    return this.http.put<User>(`${this.usersUrl}/${id}/block`, {});
   }
 
-  unblock(id: number): Observable<true> {
-    return new Observable((observer) => {
-      observer.next(true);
-    });
+  unblock(id: number): Observable<User> {
+    return this.http.put<User>(`${this.usersUrl}/${id}/unblock`, {});
   }
 }

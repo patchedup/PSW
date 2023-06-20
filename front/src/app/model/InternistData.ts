@@ -5,6 +5,6 @@ export class InternistData {
   bloodSugar: number = 0;
   weight: number = 0;
   date: string = '';
-  menstruationStartDate?: string = '';
-  menstruationEndDate?: string = ''
+  menstruation_start_date?: string = '';
+  menstruation_end_date?: string = '';
 }
