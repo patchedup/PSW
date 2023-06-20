@@ -1,8 +1,10 @@
 export class InternistData {
   id: number = 0;
-  bloodPressure: number = 0;
+  bloodPressure: string = '';
   bodyFat: number = 0;
-  bloodSuggar: string = '';
+  bloodSugar: number = 0;
   weight: number = 0;
-  measurmentDate: string = '';
+  date: string = '';
+  menstruationStartDate?: string = '';
+  menstruationEndDate?: string = ''
 }

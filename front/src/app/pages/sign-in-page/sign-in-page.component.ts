@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginDTO } from '../../model/LoginDTO';
 import { AuthorizationService } from '../../services/authorization.service';
+import { LoggedInUserDTO } from 'src/app/model/LoggedInUserDTO';
+
 
 @Component({
   selector: 'app-sign-in-page',
@@ -16,11 +18,17 @@ export class SignInPageComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.loginDTO);
-    const isSuccess = this.authorizationService.login(this.loginDTO);
-    if (isSuccess) {
-      alert('Success!');
-    } else {
-      alert('Fail!');
-    }
+    this.authorizationService.login(this.loginDTO).subscribe({
+      next : (loggedInUser : LoggedInUserDTO) => {
+        console.log(loggedInUser)
+        localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser.user));
+        localStorage.setItem('jwtToken', loggedInUser.token);
+        alert('Success!');
+      },
+      error : (err : any) => {
+        console.log(err)
+        alert('Fail!');
+      }
+    });
   }
 }

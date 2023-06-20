@@ -12,7 +12,9 @@ export class BlogsComponent implements OnInit {
   blogs: Blog[] = [];
 
   constructor(private blogService: BlogService) {
+   
     blogService.getAllBlogs().subscribe((result) => {
+      console.log(result)
       this.blogs = result;
     });
   }
@@ -21,6 +23,7 @@ export class BlogsComponent implements OnInit {
 
   onSubmit(): void {
     this.blogService.createBlog(this.newBlog).subscribe((result) => {
+     
       this.blogs.unshift(result);
       this.newBlog = new Blog();
       alert('Success!');

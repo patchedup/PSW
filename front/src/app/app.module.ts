@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
@@ -15,6 +15,7 @@ import { AdministrationComponent } from './pages/administration/administration.c
 import { ReportsComponent } from './pages/reports/reports.component';
 import { AppointmentsOverviewComponent } from './pages/appointments-overview/appointments-overview.component';
 import { WriteReportComponent } from './pages/write-report/write-report.component';
+import { JwtInterceptor } from './interceptor/JwtInterceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { WriteReportComponent } from './pages/write-report/write-report.componen
     WriteReportComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

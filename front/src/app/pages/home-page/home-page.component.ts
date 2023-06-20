@@ -13,6 +13,7 @@ export class HomePageComponent implements OnInit {
 
   constructor(public notificationService: NotificationService) {
     notificationService.getAllNotifications().subscribe((result) => {
+      console.log(result)
       this.notifications = result;
     });
   }
@@ -23,6 +24,7 @@ export class HomePageComponent implements OnInit {
     this.notificationService
       .createNotification(this.newNotification)
       .subscribe((result) => {
+      
         this.notifications.unshift(result);
         this.newNotification = new Notification();
         alert('Success!');

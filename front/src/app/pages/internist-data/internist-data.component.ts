@@ -21,10 +21,16 @@ export class InternistDataComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.userService.createInternistData(this.data).subscribe((result) => {
+    this.userService.createInternistData(this.data).subscribe({
+      next : (result) => {
+        console.log(result)
       this.allDatas.unshift(result);
       this.data = new InternistData();
       alert('Success!');
+      },
+      error : (err) => {
+        console.log(err)
+      }
     });
   }
 }

@@ -12,7 +12,7 @@
           <label for="user" class="label">Blood pressure</label>
           <input
             id="user"
-            type="number"
+            type="text"
             class="input"
             [(ngModel)]="data.bloodPressure"
           />
@@ -31,9 +31,9 @@
           <label for="name" class="label">Blood suggar</label>
           <input
             id="name"
-            type="text"
+            type="number"
             class="input"
-            [(ngModel)]="data.bloodSuggar"
+            [(ngModel)]="data.bloodSugar"
           />
         </div>
         <div class="group">
@@ -73,7 +73,7 @@
           />
         </div>
         <div class="media-body">
-          Blood suggar: {{ d.bloodSuggar }}
+          Blood suggar: {{ d.bloodSugar }}
           <br />
           Body fat: {{ d.bodyFat }}
           <br />
@@ -81,7 +81,7 @@
           <br />
           Weight: {{ d.weight }}
           <br />
-          Measured on: {{ d.measurmentDate }}
+          Measured on: {{ d.date }}
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../model/User';
 import { AuthorizationService } from '../../services/authorization.service';
+import { RegisterDTO } from 'src/app/model/RegisterDTO';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -8,19 +9,24 @@ import { AuthorizationService } from '../../services/authorization.service';
   styleUrls: ['./sign-up-page.component.css'],
 })
 export class SignUpPageComponent implements OnInit {
-  user: User = new User();
+  user: RegisterDTO = new RegisterDTO();
 
   constructor(private authorizationService: AuthorizationService) {}
 
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log(this.user);
-    const isSuccess = this.authorizationService.register(this.user);
-    if (isSuccess) {
-      alert('Sucess!');
-    } else {
-      alert('Fail!');
-    }
+    this.authorizationService.register(this.user).subscribe({
+      
+      next : (user) => {
+        console.log(user)
+        alert('Sucess!');
+      },
+      error : (err) => {
+        console.log(err)
+        alert("Fail!");
+      }
+    });
+  
   }
 }
