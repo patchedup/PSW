@@ -45,5 +45,10 @@ namespace back.Repositories
             await _context.SaveChangesAsync();
             return user;
         }
+
+        public async Task<User?> FindByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+        }
     }
 }

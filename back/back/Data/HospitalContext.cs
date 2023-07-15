@@ -12,11 +12,16 @@ public partial class HospitalContext : DbContext
     {
     }
 
+    public HospitalContext()
+        : base()
+    {
+    }
+
     public virtual DbSet<Appointment> Appointments { get; set; }
 
     public virtual DbSet<Blog> Blogs { get; set; }
 
-    public virtual DbSet<InternistDatum> InternistData { get; set; }
+    public virtual DbSet<InternistData> InternistData { get; set; }
 
     public virtual DbSet<Notification> Notifications { get; set; }
 
@@ -101,7 +106,7 @@ public partial class HospitalContext : DbContext
                 .HasConstraintName("FKpxk2jtysqn41oop7lvxcp6dqq");
         });
 
-        modelBuilder.Entity<InternistDatum>(entity =>
+        modelBuilder.Entity<InternistData>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
@@ -136,12 +141,12 @@ public partial class HospitalContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AdminId).HasColumnName("admin_id");
-            entity.Property(e => e.Diagnosis)
+            entity.Property(e => e.Title)
                 .HasMaxLength(255)
-                .HasColumnName("diagnosis");
-            entity.Property(e => e.Treatment)
+                .HasColumnName("title");
+            entity.Property(e => e.Content)
                 .HasMaxLength(255)
-                .HasColumnName("treatment");
+                .HasColumnName("content");
 
             entity.HasOne(d => d.Admin).WithMany(p => p.Notifications)
                 .HasForeignKey(d => d.AdminId)

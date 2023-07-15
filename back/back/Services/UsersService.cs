@@ -13,6 +13,12 @@ namespace back.Services
         public UsersService(IUsersRepository userRepository)
         {
             _userRepository = userRepository;
+        
+    }
+
+        public Task<User> BlockUserAsync(long id)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<User> CreateUserAsync(User user)
@@ -21,6 +27,11 @@ namespace back.Services
         }
 
         public Task<bool> DeleteUserAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> FindUserByEmailAsync(string email)
         {
             throw new NotImplementedException();
         }
@@ -35,9 +46,18 @@ namespace back.Services
             throw new NotImplementedException();
         }
 
+        public Task<bool> IsFemaleAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<User> UnblockUserAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<User> UpdateUserAsync(long id, User user)
         {
             throw new NotImplementedException();
         }
     }
-}

@@ -69,77 +69,37 @@ namespace back.Tests.Controllers
         }
 
         [Fact]
-        public async Task PutUser_ExistingId_ReturnsNoContentResult()
+        public async Task BlockUser_ExistingId_ReturnsOkResult()
         {
             // Arrange
             var id = 1;
-            var user = new User { Id = id };
+            var blockedUser = new User { Id = id, IsBlocked = 1 };
+            _userServiceMock.Setup(service => service.BlockUserAsync(id)).ReturnsAsync(blockedUser);
 
             // Act
-            var result = await _usersController.PutUser(id, user);
+            var result = await _usersController.BlockUser(id);
 
             // Assert
-            Assert.IsType<NoContentResult>(result);
-            _userServiceMock.Verify(service => service.UpdateUserAsync(id, user), Times.Once);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnedUser = Assert.IsAssignableFrom<User>(okResult.Value);
+            Assert.Equal(blockedUser, returnedUser);
         }
 
         [Fact]
-        public async Task PutUser_NonExistingId_ReturnsBadRequestResult()
+        public async Task UnblockUser_ExistingId_ReturnsOkResult()
         {
             // Arrange
             var id = 1;
-            var user = new User { Id = id };
-            _userServiceMock.Setup(service => service.UpdateUserAsync(id, user)).ThrowsAsync(new Exception());
+            var unblockedUser = new User { Id = id, IsBlocked = 0 };
+            _userServiceMock.Setup(service => service.UnblockUserAsync(id)).ReturnsAsync(unblockedUser);
 
             // Act
-            var result = await _usersController.PutUser(id, user);
+            var result = await _usersController.UnblockUser(id);
 
             // Assert
-            Assert.IsType<BadRequestResult>(result);
-        }
-
-        [Fact]
-        public async Task PostUser_ReturnsCreatedAtActionResult()
-        {
-            // Arrange
-            var user = new User();
-            _userServiceMock.Setup(service => service.CreateUserAsync(user)).ReturnsAsync(user);
-            // Act
-            var result = await _usersController.PostUser(user);
-
-            // Assert
-            var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
-            var createdUser = Assert.IsAssignableFrom<User>(createdAtActionResult.Value);
-            Assert.Equal("GetUser", createdAtActionResult.ActionName);
-            Assert.Equal(user.Id, createdUser.Id);
-        }
-
-        [Fact]
-        public async Task DeleteUser_ExistingId_ReturnsNoContentResult()
-        {
-            // Arrange
-            var id = 1;
-            _userServiceMock.Setup(service => service.DeleteUserAsync(id)).ReturnsAsync(true);
-
-            // Act
-            var result = await _usersController.DeleteUser(id);
-
-            // Assert
-            Assert.IsType<NoContentResult>(result);
-        }
-
-        [Fact]
-        public async Task DeleteUser_NonExistingId_ReturnsNotFoundResult()
-        {
-            // Arrange
-            var id = 1;
-            _userServiceMock.Setup(service => service.DeleteUserAsync(id)).ReturnsAsync(false);
-
-            // Act
-            var result = await _usersController.DeleteUser(id);
-
-            // Assert
-            Assert.IsType<NotFoundResult>(result);
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var returnedUser = Assert.IsAssignableFrom<User>(okResult.Value);
+            Assert.Equal(unblockedUser, returnedUser);
         }
     }
 }

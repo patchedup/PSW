@@ -11,5 +11,6 @@ namespace back.Repositories
         Task<User> CreateUserAsync(User user);
         Task<User> UpdateUserAsync(User user);
         Task<User> DeleteUserAsync(User user);
+        Task<User?> FindByEmailAsync(string email);
     }
 }

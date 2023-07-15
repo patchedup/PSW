@@ -21,7 +21,7 @@ public partial class Appointment
 
     public virtual User? Doctor { get; set; }
 
-    public virtual InternistDatum? MeasuredInternistData { get; set; }
+    public virtual InternistData? MeasuredInternistData { get; set; }
 
     public virtual User? Patient { get; set; }
 

@@ -12,4 +12,5 @@ public partial class Report
     public string? Treatment { get; set; }
 
     public virtual ICollection<Appointment> Appointments { get; } = new List<Appointment>();
+
 }

@@ -21,6 +21,8 @@ public partial class User
 
     public string? Role { get; set; }
 
+    private ulong? is_female;
+
     public string? Specialization { get; set; }
 
     public long? AssignedGeneralPracticeDoctorId { get; set; }
@@ -33,11 +35,12 @@ public partial class User
 
     public virtual ICollection<Blog> Blogs { get; } = new List<Blog>();
 
-    public virtual ICollection<InternistDatum> InternistData { get; } = new List<InternistDatum>();
+    public virtual ICollection<InternistData> InternistData { get; } = new List<InternistData>();
 
     public virtual ICollection<User> InverseAssignedGeneralPracticeDoctor { get; } = new List<User>();
 
     public virtual ICollection<Notification> Notifications { get; } = new List<Notification>();
 
     public virtual ICollection<Referral> Referrals { get; } = new List<Referral>();
+    public ulong? Is_female { get => is_female; set => is_female = value; }
 }

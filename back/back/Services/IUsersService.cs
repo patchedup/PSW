@@ -14,5 +14,13 @@ namespace back.Services
         Task<User> CreateUserAsync(User user);
 
         Task<bool> DeleteUserAsync(long id);
+
+        Task<User> FindUserByEmailAsync(string email);
+
+        Task<bool> IsFemaleAsync(long id);
+
+        Task<User> BlockUserAsync(long id);
+
+        Task<User> UnblockUserAsync(long id);
     }
 }
