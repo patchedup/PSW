@@ -10509,19 +10509,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kopan\\.nuget\\packages\\": {}
+    "C:\\Users\\Jasmina\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kopan\\OneDrive\\Desktop\\PSW\\back\\back\\back.csproj",
+      "projectUniqueName": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\back.csproj",
       "projectName": "back",
-      "projectPath": "C:\\Users\\kopan\\OneDrive\\Desktop\\PSW\\back\\back\\back.csproj",
-      "packagesPath": "C:\\Users\\kopan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kopan\\OneDrive\\Desktop\\PSW\\back\\back\\obj\\",
+      "projectPath": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\back.csproj",
+      "packagesPath": "C:\\Users\\Jasmina\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kopan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Jasmina\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -10529,7 +10529,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\sdk\\7.0.302\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
+        "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10596,7 +10596,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }
