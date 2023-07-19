@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\back.csproj": {}
+    "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back\\back.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\back.csproj": {
+    "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back\\back.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\back.csproj",
+        "projectUniqueName": "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back\\back.csproj",
         "projectName": "back",
-        "projectPath": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\back.csproj",
+        "projectPath": "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back\\back.csproj",
         "packagesPath": "C:\\Users\\Jasmina\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\obj\\",
+        "outputPath": "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jasmina\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -41,6 +41,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -67,7 +71,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.3.0, )"
             }
           },
           "imports": [

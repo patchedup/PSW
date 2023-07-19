@@ -5,22 +5,21 @@ namespace back.Services
 {
     public class ReportsService : IReportsService
     {
-        private readonly IReportRepository _reportsRepository;
+        IReportRepository _repository;
 
-        public ReportsService(IReportRepository reportsRepository)
+        public ReportsService(IReportRepository repository)
         {
-            _reportsRepository = reportsRepository;
+            _repository = repository;
+        }
+        public async Task<Report> CreateReportAsync(Report report)
+        {
+            return await _repository.CreateReportAsync(report);
 
         }
 
-        public Task<Report> CreateReportAsync(Report report)
+        public async Task<List<Report>> GetReportsAsync()
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<Report>> GetReportsAsync()
-        {
-            throw new NotImplementedException();
+            return await _repository.GetReportsAsync();
         }
     }
 }

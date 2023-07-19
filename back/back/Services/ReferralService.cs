@@ -1,27 +1,64 @@
-﻿using back.Dtos;
-using back.Models;
+﻿using back.Models;
 using back.Repositories;
+using back.Dtos;
 
 namespace back.Services
 {
     public class ReferralService : IReferralService
     {
-        private readonly IReferralRepository _referralsRepository;
-
-        public ReferralService(IReferralRepository referralsRepository)
+        IReferralRepository _repository;
+        IAppointmentRepository _appointmentsRepository;
+        public ReferralService(IReferralRepository repository, IAppointmentRepository appointmentsRepository)
         {
-            _referralsRepository = referralsRepository;
+            _appointmentsRepository  = appointmentsRepository;
+            _repository = repository;
+        }
+        public async Task<Referral> CreateReferralAsync(ReferralDTO referral)
+        {
+            
 
+            var reff = new Referral();
+            reff.ForDoctorId = referral.ForDoctorId;
+            reff.IsUsed = referral.IsUsed;
+
+            var newBlog = await _repository.CreateReferralAsync(reff);
+
+            var appointments = await _appointmentsRepository.GetAppointmentsAsync();
+
+            foreach (Appointment a in appointments)
+            {
+                if (a.Id == referral.AppointmentId)
+                {
+                    a.ReferralId = newBlog.Id;
+                    // mozda i report ceo da setujes
+
+                    
+                    await _appointmentsRepository.UpdateAppointmentAsync(a);
+                    break;
+                }
+            }
+
+
+            return newBlog;
         }
 
-        public Task<Referral> CreateReferralAsync(ReferralDTO referral)
+        // ne treba patient vrv, ili ako treba nzm
+        public async Task<List<Referral>> GetReferralsAsync(long patientId)
         {
-            throw new NotImplementedException();
-        }
 
-        public Task<List<Referral>> GetReferralsAsync(long patientId)
-        {
-            throw new NotImplementedException();
+            var appointments = await _appointmentsRepository.GetAppointmentsAsync();
+            var usersReferrals = new List<Referral>();
+
+            foreach (Appointment a in appointments)
+            {
+                var refid = a.ReferralId;
+                if (a.PatientId == patientId && refid != null)
+                {
+                    usersReferrals.Add(await _repository.GetReferralByIdAsync((long)refid));
+                }
+            }
+
+            return usersReferrals;
         }
     }
 }

@@ -1,42 +1,150 @@
 ﻿using back.Dtos;
 using back.Models;
 using back.Repositories;
+using System.Reflection.Metadata;
 
 namespace back.Services
 {
     public class AppointmentService : IAppointmentService
     {
-        private readonly IAppointmentRepository _appointmentsRepository;
+        IAppointmentRepository _repository;
+        IUsersService _usersService;
 
-        public AppointmentService(IAppointmentRepository appointmentsRepository)
+        public AppointmentService(IAppointmentRepository repository, IUsersService userService)
         {
-            _appointmentsRepository = appointmentsRepository;
-
+            _usersService = userService;
+            _repository = repository;
         }
 
-        public Task<Appointment> CancelAppointment(long id)
+        public async Task<Appointment> CancelAppointment(long id)
         {
-            throw new NotImplementedException();
+            Appointment? appointment = await _repository.GetAppointmentByIdAsync(id);
+           if (appointment == null)
+            {
+                throw new Exception();
+            }
+
+            var startDate = Convert.ToDateTime(appointment.Time);
+            var twoDaysBefore = startDate.AddDays(-2);
+            if(DateTime.Now >  twoDaysBefore)
+            {
+                throw new Exception();
+            }
+
+
+            appointment.Patient = null;
+            appointment.PatientId = null;
+
+            return await _repository.UpdateAppointmentAsync(appointment);
         }
 
-        public Task<List<Appointment>> GetAppointmentsAsync()
+        public async Task<Appointment> ReserveAppointmentAsync(long id, long patientId)
         {
-            throw new NotImplementedException();
+            var appointment = await _repository.GetAppointmentByIdAsync(id);
+            var patient = await _usersService.GetUserByIdAsync(patientId);
+
+            if(appointment == null)
+            {
+                throw new Exception();
+            }
+
+            appointment.PatientId = patientId;
+            appointment.Patient = patient;
+
+            return await _repository.UpdateAppointmentAsync(appointment);
         }
 
-        public Task<Appointment?> GetReccomendedAppointments(RecommendedParams recommendedParams, long id)
+        public async Task<List<Appointment>> GetAppointmentsAsync()
         {
-            throw new NotImplementedException();
+            return await _repository.GetAppointmentsAsync();
         }
 
-        public Task<List<Appointment>> GetUsersAppointments(long id)
+        public async Task<Appointment?> GetReccomendedAppointments(RecommendedParams recommendedParams, long patientId)
         {
-            throw new NotImplementedException();
+            User patient = await _usersService.GetUserByIdAsync(patientId);
+            User? doctor = null;
+            if(patient!=null && patient.AppointmentPatients!= null && patient.AppointmentPatients.Count == 0 && patient.AssignedGeneralPracticeDoctorId != null)
+            {
+                doctor = await _usersService.GetUserByIdAsync((long)patient.AssignedGeneralPracticeDoctorId);
+            } else
+            {
+                doctor = await _usersService.GetUserByIdAsync(recommendedParams.DoctorId);
+            }
+
+            List<Appointment> allAppointments = await this.GetAppointmentsAsync();
+            var isDoctorPrio = recommendedParams.IsDoctorPriority;
+            DateTime start = Convert.ToDateTime(recommendedParams.Start);
+            DateTime end = Convert.ToDateTime(recommendedParams.End);
+           
+
+            foreach (Appointment appointment in allAppointments)
+            {
+                DateTime time = Convert.ToDateTime(appointment.Time);
+                Console.WriteLine(appointment.Time);
+                var isRangeOkay = time >= start && time < end;
+                if (isRangeOkay && appointment.DoctorId == recommendedParams.DoctorId && appointment.PatientId == null)
+                {
+                    return appointment;
+                }
+            }
+
+            if(isDoctorPrio)
+            {
+                foreach (Appointment appointment in allAppointments)
+                {
+                    DateTime time = Convert.ToDateTime(appointment.Time);
+                    DateTime weekEarlier = start.AddDays(-7);
+                    DateTime weekLater = end.AddDays(7);
+
+                    var isRangeOkay = time >= weekEarlier && time < weekLater;
+                    if (isRangeOkay && appointment.DoctorId == recommendedParams.DoctorId && appointment.PatientId == null)
+                    {
+                        return appointment;
+                    }
+                }
+                return null;
+            }
+
+            var specialization = doctor.Specialization;
+            // PRvi put na pregled
+            if (patient != null && patient.AppointmentPatients != null && patient.AppointmentPatients.Count == 0 && patient.AssignedGeneralPracticeDoctorId != null)
+            {
+                return null;
+            }
+
+            foreach (Appointment appointment in allAppointments)
+            {
+                DateTime time = Convert.ToDateTime(appointment.Time);
+                var isRangeOkay = time >= start && time < end;
+                var appointmentDoctor = await _usersService.GetUserByIdAsync((long)appointment.DoctorId);
+                var isSameSpecialization = appointmentDoctor != null && appointmentDoctor.Specialization == specialization;
+                Console.WriteLine(isRangeOkay);
+                Console.WriteLine(isSameSpecialization);
+                Console.WriteLine(appointment);
+
+                if (isRangeOkay && isSameSpecialization && appointment.PatientId == null)
+                {
+                    return appointment;
+                }
+            }
+
+            return null;
+            
         }
 
-        public Task<Appointment> ReserveAppointmentAsync(long id, long patientId)
+        public async Task<List<Appointment>> GetUsersAppointments(long id)
         {
-            throw new NotImplementedException();
+            List<Appointment> appointments = await _repository.GetAppointmentsAsync();
+            List<Appointment> filtered = new List<Appointment>();
+            foreach (Appointment a in appointments)
+            {
+                if (a.PatientId == id)
+                {
+                    filtered.Add(a);
+                }
+            }
+
+            return filtered;
         }
     }
 }
