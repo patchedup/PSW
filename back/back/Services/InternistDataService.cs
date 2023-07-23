@@ -20,7 +20,7 @@ namespace back.Services
         {
             var newInternistData = new InternistData();
             var user = await _usersService.GetUserByIdAsync(userId);
-            if(user == null)
+            if (user == null)
             {
                 throw new Exception("ERROR");
             }
@@ -32,7 +32,7 @@ namespace back.Services
             newInternistData.BodyFat = internistData.BodyFat;
 
             var isFemale = await _usersService.IsFemaleAsync(userId);
-            if(isFemale == true)
+            if (isFemale == true)
             {
                 newInternistData.Menstruation_start_date = internistData.MenstruationStartDate;
                 newInternistData.Menstruation_end_date = internistData.MenstruationEndDate;

@@ -8,7 +8,8 @@ import { BlogsComponent } from './pages/blogs/blogs.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { AppointmentsOverviewComponent } from './pages/appointments-overview/appointments-overview.component';
-import { WriteReportComponent } from './pages/write-report/write-report.component';
+import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { ReferralComponent } from './pages/referral/referral.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'blogs', component: BlogsComponent },
   { path: 'administration', component: AdministrationComponent },
   { path: 'reports', component: ReportsComponent },
-  { path: 'write-report', component: WriteReportComponent },
+  { path: 'referrals', component: ReferralComponent },
+  { path: 'appointments', component: AppointmentsComponent },
   { path: 'appointment-history', component: AppointmentsOverviewComponent },
   { path: 'signIn', component: SignInPageComponent },
   { path: 'signUp', component: SignUpPageComponent },

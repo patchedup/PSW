@@ -63,7 +63,7 @@ namespace back.Tests.Controllers
             var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
             var returnedNotification = Assert.IsAssignableFrom<Notification>(createdAtActionResult.Value);
             Assert.Equal(newNotification, returnedNotification);
-            Assert.Equal("GetNotification", createdAtActionResult.ActionName);
+            Assert.Equal("PostNotification", createdAtActionResult.ActionName);
         }
     }
 }

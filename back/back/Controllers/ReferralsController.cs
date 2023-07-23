@@ -55,7 +55,7 @@ namespace back.Controllers
 
             var newBlog = await _referralService.CreateReferralAsync(referral);
 
-            return CreatedAtAction("GetReferral", new { id = newBlog.Id }, newBlog);
+            return CreatedAtAction(nameof(PostReferral), new { id = newBlog.Id }, newBlog);
         }
     }
 }

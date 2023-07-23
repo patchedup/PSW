@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WriteReportComponent } from './write-report.component';
+import { ReferralComponent } from './referral.component';
 
-describe('WriteReportComponent', () => {
-  let component: WriteReportComponent;
-  let fixture: ComponentFixture<WriteReportComponent>;
+describe('ReferralComponent', () => {
+  let component: ReferralComponent;
+  let fixture: ComponentFixture<ReferralComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WriteReportComponent ]
+      declarations: [ ReferralComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WriteReportComponent);
+    fixture = TestBed.createComponent(ReferralComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

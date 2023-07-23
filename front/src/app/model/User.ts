@@ -9,5 +9,5 @@ export class User {
   isBlocked: boolean = false;
   specialization: string = '';
   is_female: number = 0;
-  assignedGeneralPracticeId: number = 0;
+  assignedGeneralPracticeDoctorId: number = 0;
 }

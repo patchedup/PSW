@@ -3,6 +3,7 @@ import { InternistData } from '../../model/InternistData';
 import { UserService } from '../../services/user.service';
 import { AuthorizationService } from '../../services/authorization.service';
 import { User } from '../../model/User';
+import { CreateInternistDataDTO } from '../../model/CreateInternistDataDTO';
 
 @Component({
   selector: 'app-internist-data',
@@ -10,7 +11,7 @@ import { User } from '../../model/User';
   styleUrls: ['./internist-data.component.css'],
 })
 export class InternistDataComponent implements OnInit {
-  data: InternistData = new InternistData();
+  data: CreateInternistDataDTO = new CreateInternistDataDTO();
   allDatas: InternistData[] = [];
   allMenstrualDatas: InternistData[] = [];
   loggedInUser: User | null = null;
@@ -37,8 +38,8 @@ export class InternistDataComponent implements OnInit {
       next: (result) => {
         console.log(result);
         this.allDatas.unshift(result);
-        this.data = new InternistData();
-        alert('Success!');
+        this.data = new CreateInternistDataDTO();
+        alert('Successfully added measurement!');
       },
       error: (err) => {
         console.log(err);
@@ -47,10 +48,7 @@ export class InternistDataComponent implements OnInit {
   }
 
   onMenstrualSubmit(): void {
-    if (
-      !this.data.menstruation_end_date ||
-      !this.data.menstruation_start_date
-    ) {
+    if (!this.data.MenstruationEndDate || !this.data.MenstruationStartDate) {
       alert('You must fill both!');
       return;
     }
@@ -59,8 +57,8 @@ export class InternistDataComponent implements OnInit {
       next: (result) => {
         console.log(result);
         this.allMenstrualDatas.unshift(result);
-        this.data = new InternistData();
-        alert('Success!');
+        this.data = new CreateInternistDataDTO();
+        alert('Successfully added measurement!');
       },
       error: (err) => {
         console.log(err);

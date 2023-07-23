@@ -14,8 +14,9 @@ import { BlogsComponent } from './pages/blogs/blogs.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { AppointmentsOverviewComponent } from './pages/appointments-overview/appointments-overview.component';
-import { WriteReportComponent } from './pages/write-report/write-report.component';
 import { JwtInterceptor } from './interceptor/JwtInterceptor';
+import { AppointmentsComponent } from './pages/appointments/appointments.component';
+import { ReferralComponent } from './pages/referral/referral.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +31,12 @@ import { JwtInterceptor } from './interceptor/JwtInterceptor';
     AdministrationComponent,
     ReportsComponent,
     AppointmentsOverviewComponent,
-    WriteReportComponent,
+    AppointmentsComponent,
+    ReferralComponent,
   ],
   imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

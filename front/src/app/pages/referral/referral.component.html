@@ -3,7 +3,7 @@
     <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label
       for="tab-1"
       class="tab"
-      >Add report</label
+      >Add referral</label
     >
 
     <div class="login-form">
@@ -22,22 +22,17 @@
           </select>
         </div>
         <div class="group">
-          <label for="user" class="label">Diagnosis</label>
-          <input
-            id="user"
-            type="text"
-            class="input"
-            [(ngModel)]="data.diagnosis"
-          />
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Treatment</label>
-          <input
-            id="pass"
-            type="string"
-            class="input"
-            [(ngModel)]="data.treatment"
-          />
+          <label for="user" class="label">For doctor</label>
+          <select
+            [(ngModel)]="selectedDoctor"
+            class="form-control"
+            (ngModelChange)="onChange2($event)"
+            name="sele"
+          >
+            <option [value]="d.id" *ngFor="let d of doctors">
+              {{ d.email }}
+            </option>
+          </select>
         </div>
         <div class="group">
           <button class="button" (click)="onSubmit()">Add</button>
@@ -47,11 +42,15 @@
   </div>
 </div>
 
-<div class="container" style="margin-top: 20px">
-  <h2>All reports:</h2>
+<div
+  *ngIf="loggedInUser?.role === 'PATIENT'"
+  class="container"
+  style="margin-top: 20px"
+>
+  <h2>All referrals:</h2>
   <div
     class="panel panel-default"
-    *ngFor="let r of reports"
+    *ngFor="let r of referrals"
     style="border-style: solid; margin-bottom: 50px"
   >
     <div
@@ -68,20 +67,8 @@
           />
         </div>
         <div class="media-body">
-          <h4 class="media-heading">Diagnosis: {{ r?.diagnosis }}</h4>
-          Treatment: {{ r?.treatment }}
-          <br />
-          Time: {{ r?.appointment?.time }}
-          <br />
-          Blood suggar: {{ r?.appointment?.internistData?.bloodSugar }}
-          <br />
-          Body fat: {{ r?.appointment?.internistData?.bodyFat }}
-          <br />
-          Blood pressure: {{ r?.appointment?.internistData?.bloodPressure }}
-          <br />
-          Weight: {{ r?.appointment?.internistData?.weight }}
-          <br />
-          Measured on: {{ r?.appointment?.internistData?.date }}
+          <h4 class="media-heading">Is used: {{ r?.isUsed ? "Yes" : "No" }}</h4>
+          For doctor: {{ r?.forDoctorId }}
         </div>
       </div>
     </div>

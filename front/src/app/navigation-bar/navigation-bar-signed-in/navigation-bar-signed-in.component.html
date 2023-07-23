@@ -4,22 +4,25 @@
       <li class="drop not-last">
         <a routerLink="home">Home</a>
       </li>
-      <li class="drop not-last">
+      <li *ngIf="loggedInUser?.role === 'PATIENT'" class="drop not-last">
         <a routerLink="internist">Internist datas</a>
       </li>
       <li class="drop not-last">
         <a routerLink="blogs">Blogs</a>
       </li>
-      <li class="drop not-last">
+      <li class="drop not-last" *ngIf="loggedInUser?.role === 'ADMIN'">
         <a routerLink="administration">Administration</a>
+      </li>
+      <li class="drop not-last">
+        <a routerLink="appointments">Appointments</a>
       </li>
       <li class="drop not-last">
         <a routerLink="reports">Reports</a>
       </li>
       <li class="drop not-last">
-        <a routerLink="write-report">Write report</a>
+        <a routerLink="referrals">Referrals</a>
       </li>
-      <li class="drop not-last">
+      <li class="drop not-last" *ngIf="loggedInUser?.role === 'PATIENT'">
         <a routerLink="appointment-history">Appointment history</a>
       </li>
       <li class="drop">

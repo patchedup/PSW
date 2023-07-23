@@ -1,81 +1,53 @@
 import { Injectable } from '@angular/core';
 import { Appointment } from '../model/Appointement';
 import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { RecommendedParams } from '../model/RecommendedParams';
+import { AuthorizationService } from './authorization.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppointmentService {
-  constructor() {}
+  appointmentsUrl: string = 'http://localhost:5098/api/appointments';
+
+  constructor(private http: HttpClient, private auth: AuthorizationService) {}
+
+  getRecommended(options: RecommendedParams): Observable<Appointment> {
+    return this.http.post<Appointment>(
+      `${this.appointmentsUrl}/${
+        this.auth.getLoggedInUser()?.id || ''
+      }/get-recommended`,
+      options
+    );
+  }
+
+  reserve(appointmentId: number): Observable<Appointment> {
+    return this.http.put<Appointment>(
+      `${this.appointmentsUrl}/reserve/${appointmentId}/${
+        this.auth.getLoggedInUser()?.id || ''
+      }`,
+      {}
+    );
+  }
+
+  cancel(appointmentId: number): Observable<Appointment> {
+    return this.http.put<Appointment>(
+      `${this.appointmentsUrl}/cancel/${appointmentId}`,
+      {}
+    );
+  }
 
   // pass user id
   getAllUserAppointments(): Observable<Appointment[]> {
-    return new Observable((observer) => {
-      return observer.next([
-        {
-          id: 1,
-          time: 'TODAY',
-          internistData: {
-            id: 1,
-            bloodPressure: '10',
-            bloodSugar: 10,
-            bodyFat: 10,
-            date: '',
-            weight: 200,
-          },
-          doctorId: 1,
-          patientId: 1,
-        },
-        {
-          id: 2,
-          time: 'TODAY',
-          internistData: {
-            id: 1,
-            bloodPressure: '10',
-            bloodSugar: 10,
-            bodyFat: 10,
-            date: '',
-            weight: 200,
-          },
-          doctorId: 1,
-          patientId: 1,
-        },
-      ]);
-    });
+    return this.http.get<Appointment[]>(
+      `${this.appointmentsUrl}/users-appointments/${
+        this.auth.getLoggedInUser()?.id || ''
+      }`
+    );
   }
 
-  getAllAppointmentsReadyForReport(): Observable<Appointment[]> {
-    return new Observable((observer) => {
-      return observer.next([
-        {
-          id: 1,
-          time: 'TODAY',
-          internistData: {
-            id: 1,
-            bloodPressure: '10',
-            bloodSugar: 10,
-            bodyFat: 10,
-            date: '',
-            weight: 200,
-          },
-          doctorId: 1,
-          patientId: 1,
-        },
-        {
-          id: 2,
-          time: 'TODAY',
-          internistData: {
-            id: 1,
-            bloodPressure: '10',
-            bloodSugar: 10,
-            bodyFat: 10,
-            date: '',
-            weight: 200,
-          },
-          doctorId: 1,
-          patientId: 1,
-        },
-      ]);
-    });
+  getAllAppointments(): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(this.appointmentsUrl);
   }
 }

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace back.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Blogs")]
     [ApiController]
     public class BlogsController : ControllerBase
     {
@@ -51,7 +51,7 @@ namespace back.Controllers
 
             var newBlog = await _blogService.CreateBlogAsync(blog, userId);
 
-            return CreatedAtAction("GetBlog", new { id = newBlog.Id }, newBlog);
+            return CreatedAtAction(nameof(PostBlog), new { id = newBlog.Id }, newBlog);
         }
     }
 }

@@ -89,7 +89,7 @@ namespace back.Tests.Controllers
             var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
             var returnedInternistData = Assert.IsAssignableFrom<InternistData>(createdAtActionResult.Value);
             Assert.Equal(createdInternistData, returnedInternistData);
-            Assert.Equal("GetInternistData", createdAtActionResult.ActionName);
+            Assert.Equal("PostInternistData", createdAtActionResult.ActionName);
         }
     }
 }

@@ -22,15 +22,24 @@
           <h4 class="media-heading">Doctor: {{ a.doctorId }}</h4>
           Time: {{ a.time }}
           <br />
-          Blood suggar: {{ a.internistData.bloodSugar }}
-          <br />
-          Body fat: {{ a.internistData.bodyFat }}
-          <br />
-          Blood pressure: {{ a.internistData.bloodPressure }}
-          <br />
-          Weight: {{ a.internistData.weight }}
-          <br />
-          Measured on: {{ a.internistData.date }}
+          <div *ngIf="a.internistData">
+            Blood suggar: {{ a.internistData.bloodSugar }}
+            <br />
+            Body fat: {{ a.internistData.bodyFat }}
+            <br />
+            Blood pressure: {{ a.internistData.bloodPressure }}
+            <br />
+            Weight: {{ a.internistData.weight }}
+            <br />
+            Measured on: {{ a.internistData.date }}
+          </div>
+          <button
+            *ngIf="isDateInFuture(a.time)"
+            class="btn"
+            (click)="cancel(a.id)"
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>

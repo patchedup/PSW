@@ -29,7 +29,7 @@ export class AdministrationComponent implements OnInit {
           return result;
         });
 
-        alert('Success!');
+        alert('User is blocked!');
       }
     });
   }
@@ -45,7 +45,7 @@ export class AdministrationComponent implements OnInit {
           return result;
         });
 
-        alert('Success!');
+        alert('User is unblocked!');
       }
     });
   }

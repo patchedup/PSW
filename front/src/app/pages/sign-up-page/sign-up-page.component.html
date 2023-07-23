@@ -41,7 +41,16 @@
           />
         </div>
         <div class="group">
-          <button class="button" (click)="onSubmit()">Sign In</button>
+          <label for="name" class="label">Is female</label>
+          <input
+            id="female"
+            type="checkbox"
+            class="input"
+            [(ngModel)]="user.is_female"
+          />
+        </div>
+        <div class="group">
+          <button class="button" (click)="onSubmit()">Sign up</button>
         </div>
         <div class="hr"></div>
       </div>

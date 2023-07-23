@@ -5,5 +5,6 @@ export class Appointment {
   doctorId: number = 0;
   patientId: number = 0;
   time: string = '';
+  reportId?: number = 0;
   internistData: InternistData = new InternistData();
 }

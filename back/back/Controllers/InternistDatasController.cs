@@ -47,7 +47,6 @@ namespace back.Controllers
         [HttpPost]
         public async Task<ActionResult<InternistData>> PostInternistData(InternistDataDTO internistData)
         {
-            Console.WriteLine("USAO");
             string userIdString = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if(userIdString == null)
             {
@@ -57,7 +56,7 @@ namespace back.Controllers
             
             var newInternistData = await _internistDataService.CreateInternistDataAsync(internistData, userId);
 
-            return CreatedAtAction("GetInternistData", newInternistData);
+            return CreatedAtAction(nameof(PostInternistData), newInternistData);
         }
     }
 }

@@ -34,6 +34,14 @@ namespace back.Controllers
             return Ok(appointments);
         }
 
+        // GET: api/Appointments
+        [HttpGet("users-appointments/{id}")]
+        public async Task<ActionResult<IEnumerable<Appointment>>> GetUsersAppointments(long id)
+        {
+            var appointments = await _appointmentsService.GetUsersAppointments(id);
+            return Ok(appointments);
+        }
+
         // [Authorize(Policy = "PatientPolicy")]
         [HttpPost("{id}/get-recommended")]
         public async Task<ActionResult<Appointment>> GetRecommendedAppointment(long id, [FromBody] RecommendedParams recommendedParams)

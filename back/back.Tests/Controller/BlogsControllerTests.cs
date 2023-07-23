@@ -63,7 +63,7 @@ namespace back.Tests.Controllers
             var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
             var returnedBlog = Assert.IsAssignableFrom<Blog>(createdAtActionResult.Value);
             Assert.Equal(newBlog, returnedBlog);
-            Assert.Equal("GetBlog", createdAtActionResult.ActionName);
+            Assert.Equal("PostBlog", createdAtActionResult.ActionName);
         }
     }
 }

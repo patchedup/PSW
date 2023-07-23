@@ -52,7 +52,7 @@ namespace back.Controllers
 
             var newNotification= await _notificationsService.CreateNotificationAsync(notification, userId);
 
-            return CreatedAtAction("GetNotification", new { id = newNotification.Id }, newNotification);
+            return CreatedAtAction(nameof(PostNotification), new { id = newNotification.Id }, newNotification);
         }
     }
 }

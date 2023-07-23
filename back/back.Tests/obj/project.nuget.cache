@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "u3Vnx4iIqZs1emeZqmg6qsfEvT+J2vuZcL18z90dd2FEkWDgLI3Yj2vC3RJriWBsJKeLpqUI6oozTWqWrtxt7g==",
+  "dgSpecHash": "Kz1TIgvyPLXbOOlzkoZWFaG8WjyS5pdpCbx8vUIQfk3hV1jssQf7+g7E+q4rXMHuOS4Q127feNyvd9F9gyE7TQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back.Tests\\back.Tests.csproj",
+  "projectFilePath": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back.Tests\\back.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jasmina\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\Jasmina\\.nuget\\packages\\coverlet.collector\\3.2.0\\coverlet.collector.3.2.0.nupkg.sha512",

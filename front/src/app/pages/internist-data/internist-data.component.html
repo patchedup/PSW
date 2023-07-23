@@ -53,6 +53,7 @@
   </div>
 </div>
 
+<br />
 <div *ngIf="loggedInUser?.is_female" class="login-wrap">
   <div class="login-html">
     <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label
@@ -69,7 +70,7 @@
             id="user"
             type="text"
             class="input"
-            [(ngModel)]="data.menstruation_start_date"
+            [(ngModel)]="data.MenstruationStartDate"
           />
         </div>
         <div class="group">
@@ -78,7 +79,7 @@
             id="pass"
             type="string"
             class="input"
-            [(ngModel)]="data.menstruation_end_date"
+            [(ngModel)]="data.MenstruationEndDate"
           />
         </div>
         <div class="group">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Blog } from '../../model/Blog';
 import { BlogService } from '../../services/blog.service';
+import { User } from '../../model/User';
+import { AuthorizationService } from '../../services/authorization.service';
 
 @Component({
   selector: 'app-blogs',
@@ -10,11 +12,15 @@ import { BlogService } from '../../services/blog.service';
 export class BlogsComponent implements OnInit {
   newBlog: Blog = new Blog();
   blogs: Blog[] = [];
+  loggedInUser: User | null = null;
 
-  constructor(private blogService: BlogService) {
-   
+  constructor(
+    private blogService: BlogService,
+    private authService: AuthorizationService
+  ) {
+    this.loggedInUser = this.authService.getLoggedInUser();
+
     blogService.getAllBlogs().subscribe((result) => {
-      console.log(result)
       this.blogs = result;
     });
   }
@@ -23,10 +29,9 @@ export class BlogsComponent implements OnInit {
 
   onSubmit(): void {
     this.blogService.createBlog(this.newBlog).subscribe((result) => {
-     
       this.blogs.unshift(result);
       this.newBlog = new Blog();
-      alert('Success!');
+      alert('Blog created!');
     });
   }
 }

@@ -1,0 +1,89 @@
+<div *ngIf="!reccommended" class="login-wrap">
+  <div class="login-html">
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked /><label
+      for="tab-1"
+      class="tab"
+      >Options</label
+    >
+
+    <div class="login-form">
+      <div class="sign-in-htm">
+        <div class="group">
+          <label for="name" class="label">Doctor</label>
+          <select
+            [(ngModel)]="doctorId"
+            class="form-control"
+            (ngModelChange)="onChange($event)"
+            name="sele"
+          >
+            <option [value]="d.id" *ngFor="let d of doctors">
+              {{ d.firstName }} {{ d.lastName }}
+            </option>
+          </select>
+        </div>
+        <div class="group">
+          <label for="pass" class="label">Start date</label>
+          <input
+            id="pass"
+            type="string"
+            class="input"
+            [(ngModel)]="options.start"
+          />
+        </div>
+        <div class="group">
+          <label for="pass" class="label">End date</label>
+          <input
+            id="pass"
+            type="string"
+            class="input"
+            [(ngModel)]="options.end"
+          />
+        </div>
+        <div class="group">
+          <label for="name" class="label">Is doctor of more priority</label>
+          <input
+            id="name"
+            type="checkbox"
+            [disabled]="isFirstTime"
+            class="input"
+            [(ngModel)]="options.isDoctorPriority"
+          />
+        </div>
+        <div class="group">
+          <button class="button" (click)="onSubmit()">
+            Get recommendation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="panel panel-default"
+  *ngIf="reccommended"
+  style="border-style: solid; margin-bottom: 50px"
+>
+  <div
+    class="panel-body"
+    style="background-color: rgb(050, 47, 47) !important; color: white"
+  >
+    <div class="media">
+      <div class="media-left">
+        <img
+          class="media-object"
+          style="height: 200px"
+          src="https://thumbs.dreamstime.com/b/doctor-appointment-icon-flat-style-vector-eps-doctor-appointment-icon-flat-style-vector-eps-154283841.jpg"
+          alt="report"
+        />
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">Doctor: {{ reccommended.doctorId }}</h4>
+        Time: {{ reccommended.time }}
+        <br />
+        <button class="btn" (click)="accept()">Accept</button>
+        <button class="btn" (click)="reset()">Reset</button>
+      </div>
+    </div>
+  </div>
+</div>

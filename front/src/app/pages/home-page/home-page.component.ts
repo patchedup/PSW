@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../services/notification.service';
 import { Notification } from '../../model/Notification';
+import { AuthorizationService } from '../../services/authorization.service';
+import { User } from '../../model/User';
 
 @Component({
   selector: 'app-home-page',
@@ -9,13 +11,18 @@ import { Notification } from '../../model/Notification';
 })
 export class HomePageComponent implements OnInit {
   notifications: Notification[] = [];
+  loggedInUser: User | null = null;
   newNotification: Notification = new Notification();
 
-  constructor(public notificationService: NotificationService) {
+  constructor(
+    public notificationService: NotificationService,
+    public authService: AuthorizationService
+  ) {
     notificationService.getAllNotifications().subscribe((result) => {
-      console.log(result)
+      console.log(result);
       this.notifications = result;
     });
+    this.loggedInUser = authService.getLoggedInUser();
   }
 
   ngOnInit(): void {}
@@ -24,10 +31,9 @@ export class HomePageComponent implements OnInit {
     this.notificationService
       .createNotification(this.newNotification)
       .subscribe((result) => {
-      
         this.notifications.unshift(result);
         this.newNotification = new Notification();
-        alert('Success!');
+        alert('Notification added!');
       });
   }
 }

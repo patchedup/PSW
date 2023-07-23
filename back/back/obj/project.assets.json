@@ -10561,11 +10561,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back\\back.csproj",
+      "projectUniqueName": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\back.csproj",
       "projectName": "back",
-      "projectPath": "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back\\back.csproj",
+      "projectPath": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\back.csproj",
       "packagesPath": "C:\\Users\\Jasmina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Jasmina\\Desktop\\PSW - Copy\\back\\back\\obj\\",
+      "outputPath": "C:\\Users\\Jasmina\\Desktop\\PSW\\back\\back\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Jasmina\\AppData\\Roaming\\NuGet\\NuGet.Config",

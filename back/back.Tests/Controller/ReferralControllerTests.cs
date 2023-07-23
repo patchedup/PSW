@@ -59,7 +59,7 @@ namespace back.Tests.Controllers
             var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
             var returnedReferral = Assert.IsAssignableFrom<Referral>(createdAtActionResult.Value);
             Assert.Equal(createdReferral, returnedReferral);
-            Assert.Equal("GetReferral", createdAtActionResult.ActionName);
+            Assert.Equal("PostReferral", createdAtActionResult.ActionName);
             Assert.Equal(createdReferral.Id, createdAtActionResult.RouteValues["id"]);
         }
     }
