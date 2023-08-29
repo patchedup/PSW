@@ -7,6 +7,7 @@ using Xunit;
 using back.Controllers;
 using back.Models;
 using back.Services;
+using back.Dtos;
 
 namespace back.Tests.Controllers
 {
@@ -42,27 +43,51 @@ namespace back.Tests.Controllers
         public async Task PostReport_ValidReport_ReturnsOkResultWithCreatedReport()
         {
             // Arrange
-            var report = new Report();
-            _reportsServiceMock.Setup(service => service.CreateReportAsync(report)).ReturnsAsync(report);
+
+            var reportDTO = new ReportDTO
+            {
+                Id = 1,
+                Diagnosis = "DIA",
+                Treatment = "TRI",
+                AppointmentId = 1
+            };
+
+            var report = new Report
+            {
+                Id = 1,
+                Diagnosis = "DIA",
+                Treatment = "TRI"
+            };
+
+            _reportsServiceMock.Setup(service => service.CreateReportAsync(reportDTO)).ReturnsAsync(report);
 
             // Act
-            var result = await _reportsController.PostReport(report);
+            var result = await _reportsController.PostReport(reportDTO);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result.Result);
             var returnedReport = Assert.IsAssignableFrom<Report>(okResult.Value);
-            Assert.Equal(report, returnedReport);
+            Assert.Equal(reportDTO.Id, returnedReport.Id);
+            Assert.Equal(reportDTO.Treatment, returnedReport.Treatment);
+            Assert.Equal(reportDTO.Diagnosis, returnedReport.Diagnosis);
         }
 
         [Fact]
         public async Task PostReport_InvalidReport_ReturnsBadRequestResult()
         {
             // Arrange
-            var report = new Report();
-            _reportsServiceMock.Setup(service => service.CreateReportAsync(report)).ThrowsAsync(new Exception());
+            var reportDTO = new ReportDTO
+            {
+                Id = 1,
+                Diagnosis = "DIA",
+                Treatment = "TRI",
+                AppointmentId = 1
+            };
+
+            _reportsServiceMock.Setup(service => service.CreateReportAsync(reportDTO)).ThrowsAsync(new Exception());
 
             // Act
-            var result = await _reportsController.PostReport(report);
+            var result = await _reportsController.PostReport(reportDTO);
 
             // Assert
             Assert.IsType<BadRequestResult>(result.Result);

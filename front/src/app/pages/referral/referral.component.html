@@ -68,7 +68,7 @@
         </div>
         <div class="media-body">
           <h4 class="media-heading">Is used: {{ r?.isUsed ? "Yes" : "No" }}</h4>
-          For doctor: {{ r?.forDoctorId }}
+          For doctor: {{ getUser(r?.forDoctorId) }}
         </div>
       </div>
     </div>

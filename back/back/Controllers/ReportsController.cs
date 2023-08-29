@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using back.Data;
 using back.Models;
 using back.Services;
+using back.Dtos;
 
 namespace back.Controllers
 {
@@ -33,7 +34,7 @@ namespace back.Controllers
         // POST: api/Reports
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Report>> PostReport(Report report)
+        public async Task<ActionResult<Report>> PostReport(ReportDTO report)
         {
             try
             {

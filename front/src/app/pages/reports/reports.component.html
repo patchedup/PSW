@@ -68,20 +68,21 @@
           />
         </div>
         <div class="media-body">
-          <h4 class="media-heading">Diagnosis: {{ r?.diagnosis }}</h4>
+          Diagnosis: {{ r?.diagnosis }}
+          <br />
           Treatment: {{ r?.treatment }}
           <br />
-          Time: {{ r?.appointment?.time }}
+          Blood suggar:
+          {{ r?.appointments?.[0]?.measuredInternistData?.bloodSugar }}
           <br />
-          Blood suggar: {{ r?.appointment?.internistData?.bloodSugar }}
+          Body fat: {{ r?.appointments?.[0]?.measuredInternistData?.bodyFat }}
           <br />
-          Body fat: {{ r?.appointment?.internistData?.bodyFat }}
+          Blood pressure:
+          {{ r?.appointments?.[0]?.measuredInternistData?.bloodPressure }}
           <br />
-          Blood pressure: {{ r?.appointment?.internistData?.bloodPressure }}
+          Weight: {{ r?.appointments?.[0]?.measuredInternistData?.weight }}
           <br />
-          Weight: {{ r?.appointment?.internistData?.weight }}
-          <br />
-          Measured on: {{ r?.appointment?.internistData?.date }}
+          Measured on: {{ r?.appointments?.[0]?.measuredInternistData?.date }}
         </div>
       </div>
     </div>

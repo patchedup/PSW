@@ -9,11 +9,13 @@ namespace back.Services
     {
         IAppointmentRepository _repository;
         IUsersService _usersService;
+        IInternistDatasRepository _internistDatasRepository;
 
-        public AppointmentService(IAppointmentRepository repository, IUsersService userService)
+        public AppointmentService(IAppointmentRepository repository, IUsersService userService, IInternistDatasRepository internistDatasRepository)
         {
             _usersService = userService;
             _repository = repository;
+            _internistDatasRepository = internistDatasRepository;
         }
 
         public async Task<Appointment> CancelAppointment(long id)
@@ -38,10 +40,11 @@ namespace back.Services
             return await _repository.UpdateAppointmentAsync(appointment);
         }
 
-        public async Task<Appointment> ReserveAppointmentAsync(long id, long patientId)
+        public async Task<Appointment> ReserveAppointmentAsync(long id, long patientId, long internistDataId)
         {
             var appointment = await _repository.GetAppointmentByIdAsync(id);
             var patient = await _usersService.GetUserByIdAsync(patientId);
+            var internistData = await _internistDatasRepository.GetInternistDataByIdAsync(internistDataId);
 
             if(appointment == null)
             {
@@ -50,6 +53,8 @@ namespace back.Services
 
             appointment.PatientId = patientId;
             appointment.Patient = patient;
+            appointment.MeasuredInternistData = internistData;
+            appointment.MeasuredInternistDataId =  internistDataId;
 
             return await _repository.UpdateAppointmentAsync(appointment);
         }
@@ -80,7 +85,6 @@ namespace back.Services
             foreach (Appointment appointment in allAppointments)
             {
                 DateTime time = Convert.ToDateTime(appointment.Time);
-                Console.WriteLine(appointment.Time);
                 var isRangeOkay = time >= start && time < end;
                 if (isRangeOkay && appointment.DoctorId == recommendedParams.DoctorId && appointment.PatientId == null)
                 {

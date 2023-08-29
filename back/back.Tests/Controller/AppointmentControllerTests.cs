@@ -76,10 +76,10 @@ namespace back.Tests.Controllers
             var id2 = 2L;
             var reservedAppointment = new Appointment { Id = 1 };
 
-            _appointmentServiceMock.Setup(service => service.ReserveAppointmentAsync(id1, id2)).ReturnsAsync(reservedAppointment);
+            _appointmentServiceMock.Setup(service => service.ReserveAppointmentAsync(id1, id2, 0)).ReturnsAsync(reservedAppointment);
 
             // Act
-            var result = await _appointmentsController.ReserveAppointment(id1, id2);
+            var result = await _appointmentsController.ReserveAppointment(id1, id2, 0);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
@@ -94,10 +94,10 @@ namespace back.Tests.Controllers
             var id1 = 1L;
             var id2 = 2L;
 
-            _appointmentServiceMock.Setup(service => service.ReserveAppointmentAsync(id1, id2)).ReturnsAsync((Appointment)null);
+            _appointmentServiceMock.Setup(service => service.ReserveAppointmentAsync(id1, id2, 0)).ReturnsAsync((Appointment)null);
 
             // Act
-            var result = await _appointmentsController.ReserveAppointment(id1, id2);
+            var result = await _appointmentsController.ReserveAppointment(id1, id2, 0);
 
             // Assert
             Assert.IsType<NotFoundResult>(result);

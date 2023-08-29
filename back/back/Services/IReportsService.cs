@@ -1,4 +1,5 @@
-﻿using back.Models;
+﻿using back.Dtos;
+using back.Models;
 
 namespace back.Services
 {
@@ -7,6 +8,6 @@ namespace back.Services
 
         Task<List<Report>> GetReportsAsync();
 
-        Task<Report> CreateReportAsync(Report report);
+        Task<Report> CreateReportAsync(ReportDTO report);
     }
 }

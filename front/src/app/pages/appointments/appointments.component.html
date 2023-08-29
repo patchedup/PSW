@@ -81,6 +81,19 @@
         <h4 class="media-heading">Doctor: {{ reccommended.doctorId }}</h4>
         Time: {{ reccommended.time }}
         <br />
+        <div class="group">
+          <label for="name" class="label">Internist data</label>
+          <select
+            [(ngModel)]="dataId"
+            class="form-control"
+            (ngModelChange)="onChangeData($event)"
+            name="sele"
+          >
+            <option [value]="d.id" *ngFor="let d of allDatas">
+              Measued on: {{ d.date }}
+            </option>
+          </select>
+        </div>
         <button class="btn" (click)="accept()">Accept</button>
         <button class="btn" (click)="reset()">Reset</button>
       </div>

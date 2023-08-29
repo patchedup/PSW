@@ -41,6 +41,13 @@ namespace back.Controllers
             return Ok(userInternestData);
         }
 
+        [HttpGet("users-data/{id}")]
+        public async Task<ActionResult<IEnumerable<InternistData>>> GetInternistDataById(long id)
+        {
+            var datas = await _internistDataService.GetInternistDataByIdAsync(id);
+            return Ok(datas);
+        }
+
         // POST: api/InternistDatums
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [Authorize]

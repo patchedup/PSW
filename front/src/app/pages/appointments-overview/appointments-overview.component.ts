@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Appointment } from '../../model/Appointement';
 import { AppointmentService } from '../../services/appointment.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { User } from '../../model/User';
 
 @Component({
   selector: 'app-appointments-overview',
@@ -10,13 +12,19 @@ import { Router } from '@angular/router';
 })
 export class AppointmentsOverviewComponent implements OnInit {
   appointments: Appointment[] = [];
+  users: User[] = [];
 
   constructor(
     private appointmentService: AppointmentService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
     appointmentService.getAllUserAppointments().subscribe((result) => {
       this.appointments = result;
+    });
+
+    userService.getAllUsers().subscribe((res) => {
+      this.users = res;
     });
   }
 
@@ -35,6 +43,15 @@ export class AppointmentsOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  getUser(id: string | number | undefined): string {
+    const doctor = this.users.find((el) => el.id === id);
+    if (!doctor) {
+      return '';
+    }
+
+    return `${doctor.firstName} ${doctor.lastName}`;
+  }
 
   cancel(id: number): void {
     this.appointmentService.cancel(id).subscribe({

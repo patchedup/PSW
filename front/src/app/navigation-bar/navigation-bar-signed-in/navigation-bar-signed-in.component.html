@@ -13,13 +13,13 @@
       <li class="drop not-last" *ngIf="loggedInUser?.role === 'ADMIN'">
         <a routerLink="administration">Administration</a>
       </li>
-      <li class="drop not-last">
+      <li *ngIf="loggedInUser?.role === 'PATIENT'" class="drop not-last">
         <a routerLink="appointments">Appointments</a>
       </li>
-      <li class="drop not-last">
+      <li *ngIf="loggedInUser?.role !== 'ADMIN'" class="drop not-last">
         <a routerLink="reports">Reports</a>
       </li>
-      <li class="drop not-last">
+      <li *ngIf="loggedInUser?.role !== 'ADMIN'" class="drop not-last">
         <a routerLink="referrals">Referrals</a>
       </li>
       <li class="drop not-last" *ngIf="loggedInUser?.role === 'PATIENT'">

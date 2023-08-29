@@ -6,6 +6,7 @@ import { AppointmentService } from '../../services/appointment.service';
 import { Appointment } from '../../model/Appointement';
 import { AuthorizationService } from '../../services/authorization.service';
 import { Referral } from '../../model/Referral';
+import { InternistData } from '../../model/InternistData';
 
 @Component({
   selector: 'app-appointments',
@@ -17,8 +18,10 @@ export class AppointmentsComponent implements OnInit {
   doctors: User[] = [];
   isFirstTime: boolean = false;
   doctorId: number = 0;
+  dataId: number = 0;
   reccommended: Appointment | null = null;
   loggedUser: User | null = null;
+  allDatas: InternistData[] = [];
 
   constructor(
     private userService: UserService,
@@ -27,6 +30,9 @@ export class AppointmentsComponent implements OnInit {
   ) {
     let refs: Referral[] = [];
     this.loggedUser = this.authService.getLoggedInUser();
+    userService.getUserInternistData().subscribe((dat) => {
+      this.allDatas = dat;
+    });
     this.appointmentsService
       .getAllUserAppointments()
       .subscribe((allPreviousAppointments) => {
@@ -49,6 +55,7 @@ export class AppointmentsComponent implements OnInit {
             }
             console.log(allPreviousAppointments);
             console.log(usersReferrals);
+
             usersReferrals.forEach((refer) => {
               if (!refer.isUsed) {
                 const doctorReferal = res.find(
@@ -76,6 +83,10 @@ export class AppointmentsComponent implements OnInit {
     this.doctorId = newId;
   }
 
+  onChangeData(newId: any): void {
+    this.dataId = newId;
+  }
+
   onSubmit(): void {
     this.options.doctorId = +this.doctorId;
     this.appointmentsService.getRecommended(this.options).subscribe({
@@ -96,15 +107,17 @@ export class AppointmentsComponent implements OnInit {
   accept(): void {
     if (!this.reccommended) return;
     console.log(this.reccommended);
-    this.appointmentsService.reserve(this.reccommended.id).subscribe({
-      next: () => {
-        this.reccommended = null;
-        this.options = new RecommendedParams();
-        alert('Success!');
-      },
-      error: () => {
-        alert('Fail!');
-      },
-    });
+    this.appointmentsService
+      .reserve(this.reccommended.id, this.dataId)
+      .subscribe({
+        next: () => {
+          this.reccommended = null;
+          this.options = new RecommendedParams();
+          alert('Success!');
+        },
+        error: () => {
+          alert('Fail!');
+        },
+      });
   }
 }

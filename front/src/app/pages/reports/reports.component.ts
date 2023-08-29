@@ -26,7 +26,13 @@ export class ReportsComponent implements OnInit {
     this.loggedInUser = authService.getLoggedInUser();
     const loggedId = this.loggedInUser?.id;
     reportService.getAllReports().subscribe((result) => {
-      this.reports = result;
+      if (this.loggedInUser?.role === 'PATIENT') {
+        this.reports = result.filter(
+          (el) => el.appointments?.[0]?.patientId === loggedId
+        );
+      } else {
+        this.reports = result;
+      }
     });
     appointmentService.getAllAppointments().subscribe((result) => {
       this.appointments = result.filter((el) => {
@@ -44,17 +50,26 @@ export class ReportsComponent implements OnInit {
       alert('You must select appointment!');
       return;
     }
-
-    this.data.appointment = this.selectedAppointment;
-    this.reportService.createReport(this.data).subscribe({
-      next: (res) => {
-        alert('Reported added!');
-        this.reports.unshift(res);
-      },
-      error: () => {
-        alert('Fail!');
-      },
-    });
+    console.log;
+    this.reportService
+      .createReport({
+        id: this.data.id,
+        diagnosis: this.data.diagnosis,
+        treatment: this.data.treatment,
+        appointmentId: this.selectedAppointment,
+      } as any as MedicalReport)
+      .subscribe({
+        next: (res) => {
+          this.reportService.getAllReports().subscribe((datt) => {
+            this.reports = datt;
+          });
+          alert('Reported added!');
+          this.reports.unshift(res);
+        },
+        error: () => {
+          alert('Fail!');
+        },
+      });
   }
 
   ngOnInit(): void {}

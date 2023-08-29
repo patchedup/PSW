@@ -59,10 +59,10 @@ namespace back.Controllers
 
         // PUT: api/Appointments/reserve/5/1
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("reserve/{id1}/{id2}")]
-        public async Task<IActionResult> ReserveAppointment(long id1, long id2)
+        [HttpPut("reserve/{id1}/{id2}/{id3}")]
+        public async Task<IActionResult> ReserveAppointment(long id1, long id2, long id3)
         {
-            var appointment = await _appointmentsService.ReserveAppointmentAsync(id1, id2);
+            var appointment = await _appointmentsService.ReserveAppointmentAsync(id1, id2, id3);
 
             if (appointment == null)
             {

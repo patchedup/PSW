@@ -14,13 +14,15 @@ namespace back.Tests.Services
     {
         private readonly AppointmentService _appointmentService;
         private readonly Mock<IAppointmentRepository> _appointmentRepositoryMock;
+        private readonly Mock<IInternistDatasRepository> _internistDataRepositoryMock;
         private readonly Mock<IUsersService> _usersServiceMock;
 
         public AppointmentServiceTests()
         {
             _appointmentRepositoryMock = new Mock<IAppointmentRepository>();
             _usersServiceMock = new Mock<IUsersService>();
-            _appointmentService = new AppointmentService(_appointmentRepositoryMock.Object, _usersServiceMock.Object);
+            _internistDataRepositoryMock = new Mock<IInternistDatasRepository>();
+            _appointmentService = new AppointmentService(_appointmentRepositoryMock.Object, _usersServiceMock.Object, _internistDataRepositoryMock.Object);
         }
 
         [Fact]
@@ -108,7 +110,7 @@ namespace back.Tests.Services
                 .ReturnsAsync(appointment);
 
             // Act
-            var result = await _appointmentService.ReserveAppointmentAsync(appointmentId, patientId);
+            var result = await _appointmentService.ReserveAppointmentAsync(appointmentId, patientId, 0);
 
             // Assert
             Assert.Equal(patientId, result.PatientId);
@@ -126,7 +128,7 @@ namespace back.Tests.Services
                 .ReturnsAsync((Appointment)null);
 
             // Act & Assert
-            await Assert.ThrowsAsync<Exception>(() => _appointmentService.ReserveAppointmentAsync(appointmentId, patientId));
+            await Assert.ThrowsAsync<Exception>(() => _appointmentService.ReserveAppointmentAsync(appointmentId, patientId, 0));
         }
 
         [Fact]

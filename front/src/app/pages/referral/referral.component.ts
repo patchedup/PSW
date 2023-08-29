@@ -31,6 +31,9 @@ export class ReferralComponent implements OnInit {
 
     userService.getAllReferrals().subscribe((result) => {
       this.referrals = result;
+      this.referrals.forEach((el) => {
+        userService.getUserInternistData();
+      });
     });
 
     appointmentService.getAllAppointments().subscribe((result) => {
@@ -47,6 +50,15 @@ export class ReferralComponent implements OnInit {
 
   onChange2(newData: any): void {
     this.selectedDoctor = newData;
+  }
+
+  getUser(id: string | number | undefined): string {
+    const doctor = this.doctors.find((el) => el.id === id);
+    if (!doctor) {
+      return '';
+    }
+
+    return `${doctor.firstName} ${doctor.lastName}`;
   }
 
   onSubmit(): void {

@@ -19,7 +19,7 @@
           />
         </div>
         <div class="media-body">
-          <h4 class="media-heading">Doctor: {{ a.doctorId }}</h4>
+          <h4 class="media-heading">Doctor: {{ getUser(a.doctorId) }}</h4>
           Time: {{ a.time }}
           <br />
           <div *ngIf="a.internistData">

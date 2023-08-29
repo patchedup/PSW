@@ -1,4 +1,5 @@
-﻿using back.Models;
+﻿using back.Dtos;
+using back.Models;
 using back.Repositories;
 using back.Services;
 using Moq;
@@ -13,11 +14,15 @@ namespace back.Tests.Services
     {
         private readonly ReportsService _reportsService;
         private readonly Mock<IReportRepository> _reportRepositoryMock;
+        private readonly Mock<IInternistDatasRepository> _internistDataRepositoryMock;
+        private readonly Mock<IAppointmentRepository> _appointmentRepositoryMock;
 
         public ReportsServiceTests()
         {
             _reportRepositoryMock = new Mock<IReportRepository>();
-            _reportsService = new ReportsService(_reportRepositoryMock.Object);
+            _internistDataRepositoryMock = new Mock<IInternistDatasRepository>();
+            _appointmentRepositoryMock = new Mock<IAppointmentRepository>();
+            _reportsService = new ReportsService(_reportRepositoryMock.Object, _appointmentRepositoryMock.Object ,_internistDataRepositoryMock.Object);
         }
 
         [Fact]
@@ -38,14 +43,32 @@ namespace back.Tests.Services
         public async Task CreateReportAsync_ValidReport_ReturnsCreatedReport()
         {
             // Arrange
-            var report = new Report { Id = 1 };
-            _reportRepositoryMock.Setup(repository => repository.CreateReportAsync(report)).ReturnsAsync(report);
+
+            var reportDTO = new ReportDTO
+            {
+                Id = 1,
+                Diagnosis = "DIA",
+                Treatment = "TRI",
+                AppointmentId = 1
+            };
+
+            var report = new Report
+            {
+                Id = 1,
+                Diagnosis = "DIA",
+                Treatment = "TRI"
+            };
+
+
+            _reportRepositoryMock.Setup(repository => repository.CreateReportAsync(It.IsAny<Report>())).ReturnsAsync(report);
 
             // Act
-            var createdReport = await _reportsService.CreateReportAsync(report);
+            var createdReport = await _reportsService.CreateReportAsync(reportDTO);
 
             // Assert
-            Assert.Equal(report, createdReport);
+            Assert.Equal(reportDTO.Id, createdReport.Id);
+            Assert.Equal(reportDTO.Treatment, createdReport.Treatment);
+            Assert.Equal(reportDTO.Diagnosis, createdReport.Diagnosis);
         }
 
     }

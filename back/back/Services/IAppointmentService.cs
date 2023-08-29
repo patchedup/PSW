@@ -13,6 +13,6 @@ namespace back.Services
 
         Task<Appointment> CancelAppointment(long id);
 
-        Task<Appointment> ReserveAppointmentAsync(long id, long patientId);
+        Task<Appointment> ReserveAppointmentAsync(long id, long patientId, long internistDataId);
     }
 }

@@ -22,11 +22,11 @@ export class AppointmentService {
     );
   }
 
-  reserve(appointmentId: number): Observable<Appointment> {
+  reserve(appointmentId: number, dataId: number): Observable<Appointment> {
     return this.http.put<Appointment>(
       `${this.appointmentsUrl}/reserve/${appointmentId}/${
         this.auth.getLoggedInUser()?.id || ''
-      }`,
+      }/${dataId}`,
       {}
     );
   }

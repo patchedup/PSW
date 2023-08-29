@@ -17,6 +17,7 @@ import { AppointmentsOverviewComponent } from './pages/appointments-overview/app
 import { JwtInterceptor } from './interceptor/JwtInterceptor';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
 import { ReferralComponent } from './pages/referral/referral.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,13 @@ import { ReferralComponent } from './pages/referral/referral.component';
     AppointmentsComponent,
     ReferralComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],

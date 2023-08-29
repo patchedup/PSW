@@ -46,9 +46,9 @@ namespace back.Services
             throw new NotImplementedException();
         }
 
-        public Task<InternistData> GetInternistDataByIdAsync(long id)
+        public async Task<InternistData> GetInternistDataByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await _internistDataRepository.GetInternistDataByIdAsync(id);
         }
 
         public Task<List<InternistData>> GetInternistDatasAsync()
