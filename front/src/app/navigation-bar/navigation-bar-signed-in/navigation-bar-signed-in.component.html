@@ -16,6 +16,9 @@
       <li *ngIf="loggedInUser?.role === 'PATIENT'" class="drop not-last">
         <a routerLink="appointments">Appointments</a>
       </li>
+      <li class="drop not-last">
+        <a routerLink="blood-appointments">Blood Appointments</a>
+      </li>
       <li *ngIf="loggedInUser?.role !== 'ADMIN'" class="drop not-last">
         <a routerLink="reports">Reports</a>
       </li>

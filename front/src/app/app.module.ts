@@ -18,6 +18,7 @@ import { JwtInterceptor } from './interceptor/JwtInterceptor';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
 import { ReferralComponent } from './pages/referral/referral.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BloodAppointmentComponent } from './pages/blood-appointment/blood-appointment.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppointmentsOverviewComponent,
     AppointmentsComponent,
     ReferralComponent,
+    BloodAppointmentComponent,
   ],
   imports: [
     BrowserModule,

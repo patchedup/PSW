@@ -10,6 +10,7 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { AppointmentsOverviewComponent } from './pages/appointments-overview/appointments-overview.component';
 import { AppointmentsComponent } from './pages/appointments/appointments.component';
 import { ReferralComponent } from './pages/referral/referral.component';
+import { BloodAppointmentComponent } from './pages/blood-appointment/blood-appointment.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'reports', component: ReportsComponent },
   { path: 'referrals', component: ReferralComponent },
   { path: 'appointments', component: AppointmentsComponent },
+  { path: 'blood-appointments', component: BloodAppointmentComponent },
   { path: 'appointment-history', component: AppointmentsOverviewComponent },
   { path: 'signIn', component: SignInPageComponent },
   { path: 'signUp', component: SignUpPageComponent },
