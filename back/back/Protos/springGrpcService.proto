@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package com.isa.grpc;
+
+option csharp_namespace = "back.Protos";
+import "Protos/model.proto";
+
+service SpringGrpcService{
+  rpc communicate (MessageProto) returns (MessageResponseProto);
+  rpc getAllAppointments (FacilityIdRequest) returns (AppointmentListResponseProto);
+  rpc createAppointment (CreateAppointmentRequest) returns (AppointmentDTO);
+}
+
+message FacilityIdRequest {
+  int32 centerId = 1;
+}
+
+message AppointmentListResponseProto {
+  repeated AppointmentDTO appointments = 1;
+}
+
+message CreateAppointmentRequest {
+  int32 userId = 1;
+  AppointmentDTO appointment = 2;
+}

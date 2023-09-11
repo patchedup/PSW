@@ -1,6 +1,8 @@
 ﻿using back.Dtos;
 using back.Models;
+using back.Protos;
 using back.Repositories;
+using Grpc.Core;
 using System.Reflection.Metadata;
 
 namespace back.Services
@@ -10,12 +12,14 @@ namespace back.Services
         IAppointmentRepository _repository;
         IUsersService _usersService;
         IInternistDatasRepository _internistDatasRepository;
+        IDonationRepository _donationRepository;
 
-        public AppointmentService(IAppointmentRepository repository, IUsersService userService, IInternistDatasRepository internistDatasRepository)
+        public AppointmentService(IAppointmentRepository repository, IUsersService userService, IInternistDatasRepository internistDatasRepository, IDonationRepository donationRepository)
         {
             _usersService = userService;
             _repository = repository;
             _internistDatasRepository = internistDatasRepository;
+            _donationRepository = donationRepository;
         }
 
         public async Task<Appointment> CancelAppointment(long id)
@@ -40,6 +44,52 @@ namespace back.Services
             return await _repository.UpdateAppointmentAsync(appointment);
         }
 
+        public async Task<Donation> ToggleArchiveDonation(long id)
+        {
+            Donation? donation = await _donationRepository.GetDonationByIdAsync(id);
+            if (donation == null)
+            {
+                throw new Exception();
+            }
+
+            donation.IsArchived = (ulong)(donation.IsArchived == 0 ? 1 : 0);
+            donation.Is_Archived = (ulong)(donation.Is_Archived == 0 ? 1 : 0);
+
+            var response = await _donationRepository.UpdateDonationAsync(donation);
+            return response;
+        }
+
+        public async Task<Donation> TogglePublishDonation(long id)
+        {
+            Donation? donation = await _donationRepository.GetDonationByIdAsync(id);
+            if (donation == null)
+            {
+                throw new Exception();
+            }
+
+            donation.ShouldPublish = (ulong)(donation.ShouldPublish == 0 ? 1 : 0);
+            donation.Should_publish = (ulong)(donation.Should_publish == 0 ? 1 : 0);
+            return await _donationRepository.UpdateDonationAsync(donation);
+        }
+
+        public async Task<Donation> ReserveDonation(long idDonation, long idPatient)
+        {
+            Donation? donation = await _donationRepository.GetDonationByIdAsync(idDonation);
+            if (donation == null)
+            {
+                throw new Exception();
+            }
+
+            donation.PatientId = idPatient;
+            donation.Patient = await _usersService.GetUserByIdAsync(idPatient);
+            Channel channel = new Channel("127.0.0.1:8787", ChannelCredentials.Insecure);
+            SpringGrpcService.SpringGrpcServiceClient client = new SpringGrpcService.SpringGrpcServiceClient(channel);
+            // var response = await client.createAppointmentAsync(new FacilityIdRequest{ CenterId = 1});
+            // save response to database
+            // return response
+            return await _donationRepository.UpdateDonationAsync(donation);
+        }
+
         public async Task<Appointment> ReserveAppointmentAsync(long id, long patientId, long internistDataId)
         {
             var appointment = await _repository.GetAppointmentByIdAsync(id);
@@ -62,6 +112,16 @@ namespace back.Services
         public async Task<List<Appointment>> GetAppointmentsAsync()
         {
             return await _repository.GetAppointmentsAsync();
+        }
+
+        public async Task<List<Donation>> GetDonationsAsync()
+        {
+            Channel channel = new Channel("127.0.0.1:8787", ChannelCredentials.Insecure);
+            SpringGrpcService.SpringGrpcServiceClient client = new SpringGrpcService.SpringGrpcServiceClient(channel);
+            // var response = await client.getAllAppointmentsAsync(new FacilityIdRequest{ CenterId = 1});
+            // save response to database
+            // return response
+            return await _donationRepository.GetDonationsAsync();
         }
 
         public async Task<Appointment?> GetReccomendedAppointments(RecommendedParams recommendedParams, long patientId)

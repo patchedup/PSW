@@ -16,13 +16,15 @@ namespace back.Tests.Services
         private readonly Mock<IAppointmentRepository> _appointmentRepositoryMock;
         private readonly Mock<IInternistDatasRepository> _internistDataRepositoryMock;
         private readonly Mock<IUsersService> _usersServiceMock;
+        private readonly Mock<IDonationRepository> _donationRepositoryMock;
 
         public AppointmentServiceTests()
         {
             _appointmentRepositoryMock = new Mock<IAppointmentRepository>();
             _usersServiceMock = new Mock<IUsersService>();
             _internistDataRepositoryMock = new Mock<IInternistDatasRepository>();
-            _appointmentService = new AppointmentService(_appointmentRepositoryMock.Object, _usersServiceMock.Object, _internistDataRepositoryMock.Object);
+            _donationRepositoryMock = new Mock<IDonationRepository>();
+            _appointmentService = new AppointmentService(_appointmentRepositoryMock.Object, _usersServiceMock.Object, _internistDataRepositoryMock.Object, _donationRepositoryMock.Object);
         }
 
         [Fact]

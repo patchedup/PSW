@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Text.Json.Serialization;
+using Grpc.Core;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -72,12 +73,14 @@ builder.Services.AddScoped<IReferralRepository, ReferralRepository>();
 builder.Services.AddScoped<IReferralService, ReferralService>();
 builder.Services.AddScoped<IAppointmentService, AppointmentService>();
 builder.Services.AddScoped<IReportRepository, ReportRepository>();
+builder.Services.AddScoped<IDonationRepository, DonationRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 builder.Services.AddScoped<IReportsService, ReportsService>();
 builder.Services.AddScoped<IInternistDataService, InternistDataService>();
 builder.Services.AddScoped<IBlogsService, BlogsService>();
 builder.Services.AddScoped<INotificationsService, NotificationsService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddDbContext<HospitalContext>(options => {
     options.UseMySql(builder.Configuration.GetConnectionString("PswDB"),
     Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.23-mysql"));

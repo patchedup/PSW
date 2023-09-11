@@ -1,0 +1,63 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package com.isa.grpc;
+option csharp_namespace = "back.Protos";
+
+message MessageProto{
+  string message = 1;
+  int64 randomInteger = 2;
+}
+
+message MessageResponseProto {
+  string response = 1;
+  string status = 2;
+}
+
+
+message UserDTO {
+  // Define UserDTO fields
+  int32 id = 1;
+  string username = 2;
+  string email = 3;
+  string password = 4;
+  string firstName = 5;
+  string lastName = 6;
+  string address = 7;
+  string city = 8;
+  string zipCode = 9;
+  string country = 10;
+  string phoneNumber = 11;
+  int32 jmbg = 12;
+  enum Gender {
+    MALE = 0;
+    FEMALE = 1;
+  }
+  Gender gender = 13;
+  string job = 14;
+  string workplace = 15;
+  int32 pointsCollected = 16;
+  bool filledQuestionnaire = 17;
+  bool accountVerified = 18;
+}
+
+message FacilityDTO {
+  // Define FacilityDTO fields
+  int32 centerId = 1;
+  string centerName = 2;
+  string centerAddress = 3;
+  string centerDescription = 4;
+  repeated AppointmentDTO centerAppointments = 5;
+  UserDTO centerAdmins = 7;
+  int32 centerSupplies = 8;
+  float grade = 9;
+  bool isAvailable = 10;
+}
+
+message AppointmentDTO {
+  int32 appointmentId = 1;
+  UserDTO user = 2;
+  google.protobuf.Timestamp dateOfAppointment = 3;
+  google.protobuf.Timestamp timeOfAppointment = 4;
+  FacilityDTO facility = 5;
+}

@@ -34,14 +34,14 @@
           class="btn"
           (click)="archive(a.id)"
         >
-          Archive
+          {{ a.isArchived ? "Unarchive" : "Archive" }}
         </button>
         <button
           *ngIf="loggedUser?.role === 'ADMIN'"
           class="btn"
           (click)="publish(a.id)"
         >
-          Publish
+          {{ a.shouldPublish ? "Unpublish" : "Publish" }}
         </button>
         <div *ngIf="loggedUser?.role === 'DOCTOR'">
           <div class="group">
@@ -58,6 +58,35 @@
             </select>
             <br />
             <button class="btn" (click)="reserve(a.id)">Reserve</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="this.myBloodAppointments.length > 0">
+    <h2>My blood appointments:</h2>
+    <div
+      class="panel panel-default"
+      *ngFor="let a of myBloodAppointments"
+      style="border-style: solid; margin-bottom: 50px"
+    >
+      <div
+        class="panel-body"
+        style="background-color: rgb(050, 47, 47) !important; color: white"
+      >
+        <div class="media">
+          <div class="media-left">
+            <img
+              class="media-object"
+              style="height: 200px"
+              src="https://imgs.search.brave.com/j-gD2XgKVzx3TJRTEb6Es8L6ZPPXOHVW0TaipvgU0jE/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9jZG4u/dmVjdG9yc3RvY2su/Y29tL2kvcHJldmll/dy0xeC8xMy85NC9i/bG9vZC1kb25vci1s/b2dvLXZlY3Rvci0y/NjE4MTM5NC5qcGc"
+              alt="donor"
+            />
+          </div>
+          <div class="media-body">
+            <h2 class="media-heading">{{ a.hospitalName }}</h2>
+            Date: {{ a.time }}
           </div>
         </div>
       </div>

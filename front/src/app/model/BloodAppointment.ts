@@ -6,4 +6,5 @@ export class BloodAppointment {
   isArchived: boolean = false;
   shouldPublish: boolean = true;
   time: string = '';
+  patientId: number = 0;
 }

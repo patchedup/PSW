@@ -19,6 +19,8 @@ public partial class HospitalContext : DbContext
 
     public virtual DbSet<Appointment> Appointments { get; set; }
 
+    public virtual DbSet<Donation> Donations{ get; set; }
+
     public virtual DbSet<Blog> Blogs { get; set; }
 
     public virtual DbSet<InternistData> InternistData { get; set; }
@@ -104,6 +106,32 @@ public partial class HospitalContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Blogs)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("FKpxk2jtysqn41oop7lvxcp6dqq");
+        });
+
+        modelBuilder.Entity<Donation>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("donations");
+
+            entity.HasIndex(e => e.PatientId, "patient_id_ref_idx");
+
+            
+            entity.Property(e => e.PatientId).HasColumnName("patient_id");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Time)
+                .HasMaxLength(255)
+                .HasColumnName("time");
+            entity.Property(e => e.HospitalName)
+                .HasMaxLength(255)
+                .HasColumnName("hospitalName");
+            entity.Property(e => e.IsArchived)
+                 .HasColumnType("bit(1)")
+                 .HasColumnName("is_archived");
+            entity.Property(e => e.ShouldPublish)
+                 .HasColumnType("bit(1)")
+                 .HasColumnName("should_publish");
+
         });
 
         modelBuilder.Entity<InternistData>(entity =>

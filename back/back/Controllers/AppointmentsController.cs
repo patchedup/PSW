@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using back.Dtos;
 using back.Services;
 using System.Security.Claims;
+using back.Protos;
+using Grpc.Core;
 
 namespace back.Controllers
 {
@@ -23,8 +25,9 @@ namespace back.Controllers
 
         public AppointmentsController(IAppointmentService appointmentService)
         {
-            _appointmentsService = appointmentService; 
+            _appointmentsService = appointmentService;
         }
+
 
         // GET: api/Appointments
         [HttpGet]
@@ -32,6 +35,57 @@ namespace back.Controllers
         {
             var appointments = await _appointmentsService.GetAppointmentsAsync();
             return Ok(appointments);
+        }
+
+        // GET: api/Appointments/Donations
+        [HttpGet("donations")]
+        public async Task<ActionResult> GetDonations()
+        {
+
+            var response = await _appointmentsService.GetDonationsAsync();
+            return Ok(response);
+        }
+
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("toggleArchive/{id}")]
+        public async Task<IActionResult> ToggleArchiveDonationAppointment(long id)
+        {
+            var donation = await _appointmentsService.ToggleArchiveDonation(id);
+
+            if (donation == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(donation);
+        }
+
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("togglePublish/{id}")]
+        public async Task<IActionResult> TogglePublishDonationAppointment(long id)
+        {
+            var donation = await _appointmentsService.TogglePublishDonation(id);
+
+            if (donation == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(donation);
+        }
+
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("reserve/{idDonation}/{idPatient}")]
+        public async Task<IActionResult> ReserveDonation(long idDonation, long idPatient)
+        {
+            var donation = await _appointmentsService.ReserveDonation(idDonation, idPatient);
+
+            if (donation == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(donation);
         }
 
         // GET: api/Appointments
